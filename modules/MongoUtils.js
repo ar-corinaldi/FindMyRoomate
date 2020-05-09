@@ -26,7 +26,7 @@ function MongoUtils() {
 
   mu.users.insert = (userData) => {
     return mu.connect().then((client) => {
-      const usuarios = client.db(DB_NAME).collection("users");
+      const usuarios = client.db(DB_NAME).collection("Users");
       const query = { username: userData.username };
       return usuarios
         .findOne(query)
@@ -39,7 +39,7 @@ function MongoUtils() {
 
   mu.users.findByUsername = (username, cb) => {
     return mu.connect().then((client) => {
-      const users = client.db(DB_NAME).collection("users");
+      const users = client.db(DB_NAME).collection("Users");
       const query = { username };
       return users
         .findOne(query)
@@ -52,7 +52,7 @@ function MongoUtils() {
 
   mu.users.findById = (_id, cb) => {
     return mu.connect().then((client) => {
-      const users = client.db(DB_NAME).collection("users");
+      const users = client.db(DB_NAME).collection("Users");
       const query = { _id: ObjectId(_id) };
       return users
         .findOne(query)
