@@ -63,47 +63,16 @@ function MongoUtils() {
     });
   };
 
-  mu.shops = {};
+  mu.feeds = {};
 
-  mu.shops.facturar = (query, shopId) => {
-    return mu.connect().then(client => {
-      const facturas = client.db(DB_NAME).collection("facturas");
-      query.id_shop = shopId;
-      console.log(query);
-      return facturas.insertOne(query).finally(() => client.close());
-    });
-  };
-
-  mu.shops.findAll = (shopId) => {
+  mu.feeds.findAll = () => {
     return mu.connect().then((client) => {
-      const shops = client.db(DB_NAME).collection("shops");
+      const feeds = client.db(DB_NAME).collection("Feed");
       const query = {};
 
-      return shops
+      return feeds
         .find(query)
         .toArray()
-        .finally(() => client.close());
-    });
-  };
-
-  mu.shops.findProductInShop = (shopId, productId) => {
-    return mu.connect().then((client) => {
-      const shops = client.db(DB_NAME).collection("shops");
-      const query = { _id: ObjectId(shopId) };
-      console.log("query", query);
-      return shops
-        .findOne(query)
-        .then((shop) => {
-          console.log(shop);
-          if (shop)
-            for (let product of shop.products) {
-              console.log(productId);
-              if (product.id === productId) {
-                return product;
-              }
-            }
-          return null;
-        })
         .finally(() => client.close());
     });
   };

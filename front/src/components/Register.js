@@ -28,13 +28,13 @@ function Register(props) {
                 <div class="col-lg-6">
                   <div class="p-5">
                     <div class="text-center">
-                      <h1 class="h4 text-gray-900 mb-4">Regístrate</h1>
+                      <h1 class="h4 text-gray-900 mb-4">Sign Up</h1>
                     </div>
 
                     <form method="POST" onSubmit={fetching}>
                       <div className="form-group">
                         <label className="label-input" htmlFor="username">
-                          Nombre de usuario
+                          Username
                         </label>
                         <input
                           className="form-control"
@@ -46,7 +46,7 @@ function Register(props) {
                       </div>
                       <div className="form-group">
                         <label className="label-input" htmlFor="password">
-                          Contraseña
+                          Password
                         </label>
                         <input
                           type="password"
@@ -61,7 +61,7 @@ function Register(props) {
                           className="label-input"
                           htmlFor="password2Register"
                         >
-                          Repetir contraseña
+                          Repeat password
                         </label>
                         <input
                           type="password"
@@ -73,7 +73,7 @@ function Register(props) {
                       </div>
                       <div className="form-group">
                         <label className="label-input" htmlFor="nameRegister">
-                          Nombre Completo
+                          Full Name
                         </label>
                         <input
                           type="text"
@@ -89,7 +89,7 @@ function Register(props) {
                           htmlFor="phone_register"
                           className="primary"
                         >
-                          Celular
+                          Phone Number
                         </label>
                         <input
                           type="number"
@@ -101,7 +101,7 @@ function Register(props) {
                       </div>
                       <div className="form-group">
                         <label className="label-input" htmlFor="email_register">
-                          Correo
+                          Email
                         </label>
                         <input
                           type="email"
@@ -112,7 +112,7 @@ function Register(props) {
                         />
                       </div>
                       <button type="submit" className="shop-go">
-                        Enviar
+                        Submit
                       </button>
                     </form>
                   </div>

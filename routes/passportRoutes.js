@@ -52,6 +52,23 @@ router.post("/register", (req, res) => {
   }
 });
 
+router.get("/getUser", function (req, res) {
+  console.log("req.user", req.user);
+  const message = null;
+  if (req.user) res.json(req.user);
+  else res.json(message);
+});
+
+router.get("/loadFeed", (req,res) => {
+  mongo.feeds.findAll()
+    .then(feeds => {
+      console.log("Feeds", feeds);
+      const obj = {feeds};
+      // console.log(obj);
+      res.json(feeds);
+    })
+})
+
 module.exports = router;
 
 

@@ -24,13 +24,13 @@ function Login(props) {
               <div className="col-lg-6">
                 <div className="p-5">
                   <div className="text-center">
-                    <h1 className="h4 text-gray-900 mb-4">Inicie su sesión</h1>
+                    <h1 className="h4 text-gray-900 mb-4">Login</h1>
                   </div>
 
                   <form method="POST" action="/login">
                     <div className="form-group">
                       <label className="label-input" htmlFor="username">
-                        Nombre de usuario
+                        Username
                       </label>
                       <input
                         className="form-control"
@@ -42,7 +42,7 @@ function Login(props) {
                     </div>
                     <div className="form-group">
                       <label className="label-input" htmlFor="password">
-                        Contraseña
+                        Password
                       </label>
                       <input
                         type="password"
@@ -53,7 +53,7 @@ function Login(props) {
                       />
                     </div>
                     <button type="submit" className="shop-go">
-                      Entrar
+                      Submit
                     </button>
                   </form>
                   <div className="register">
@@ -62,7 +62,7 @@ function Login(props) {
                       className="label-input"
                       to="/register"
                     >
-                      ¿No eres un miembro? Registrate
+                      ¿Don't have an account? Sign up
                     </Link>
                   </div>
                 </div>
