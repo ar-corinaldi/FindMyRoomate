@@ -77,6 +77,14 @@ function MongoUtils() {
     });
   };
 
+  mu.feeds.insert = (query) => {
+    return mu.connect().then((client) => {
+      const feeds = client.db(DB_NAME).collection("Feed");
+      console.log("THIS IS INSERT FEED", query);
+      return feeds.insertOne(query).finally(() => client.close());
+    });
+  };
+
   return mu;
 }
 

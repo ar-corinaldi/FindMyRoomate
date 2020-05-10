@@ -5,7 +5,7 @@ function Navbar(props) {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="/">
           Navbar
         </a>
         <button
@@ -21,9 +21,10 @@ function Navbar(props) {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <a className="nav-item nav-link active">
+            <Link to="/"><a className="nav-item nav-link active">
               Home <span className="sr-only">(current)</span>
             </a>
+            </Link>
             <a className="nav-item nav-link">Features</a>
             <a className="nav-item nav-link">Pricing</a>
             {props.user ? (

@@ -1,14 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 function Profile(props) {
+  const refPrice = useRef();
+  const refDescription = useRef();
+  const refImage = useRef();
+
   return (
     <div>
       Hello Profile
       <div className="col-lg-6">
         <div className="p-5">
           <div className="text-center">
-            <h1 className="h4 text-gray-900 mb-4">Inicie su sesión</h1>
+            <h1 className="h4 text-gray-900 mb-4">Add your feed!</h1>
           </div>
 
           <form method="POST" action="/feed">
@@ -21,6 +25,7 @@ function Profile(props) {
                 type="text"
                 name="image"
                 id="image"
+                ref={refImage}
                 required
               />
             </div>
@@ -34,6 +39,7 @@ function Profile(props) {
                 id="price"
                 className="form-control"
                 required
+                ref={refPrice}
               />
             </div>
             <div className="form-group input-group">
@@ -45,11 +51,12 @@ function Profile(props) {
                 id="description"
                 className="form-control"
                 required
+                ref={refDescription}
               >
               </textarea>
             </div>
             <button type="submit">
-              Crear
+              Create
             </button>
           </form>
           <div className="register">

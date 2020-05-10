@@ -45,7 +45,7 @@ function App() {
             {!user ? (
               <Route path="/profile" exact component={() => <Login />} />
             ) : (
-              <Route path="/profile" exact component={() => <Profile />} />
+              <Route path="/profile" exact component={() => <Profile user={user}/>} />
             )}
             <Route path="/logout" exact component={() => <Logout setUser={setUser}/>} />
           </Switch>

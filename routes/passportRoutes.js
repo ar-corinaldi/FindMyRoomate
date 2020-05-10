@@ -1,11 +1,11 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 const passport = require("passport");
 const crypto = require("crypto");
 const mongo = require("../modules/MongoUtils");
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get("/", function (req, res) {
   res.send("Ping prueba");
 });
 
@@ -59,18 +59,25 @@ router.get("/getUser", function (req, res) {
   else res.json(message);
 });
 
-router.get("/loadFeed", (req,res) => {
-  mongo.feeds.findAll()
-    .then(feeds => {
-      console.log("Feeds", feeds);
-      const obj = {feeds};
-      // console.log(obj);
-      res.json(feeds);
-    })
-})
+router.get("/loadFeed", (req, res) => {
+  mongo.feeds.findAll().then((feeds) => {
+    console.log("Feeds", feeds);
+    res.json(feeds);
+  });
+});
+
+router.post("/feed", (req, res) => {
+  // console.log("THIS IS MY REQBODY",req.body);
+  if (req.user) {
+    req.body.user = req.user.username;
+    req.body.availability = true;
+    mongo.feeds.insert(req.body);
+    res.redirect("/feed");
+  }
+  else res.redirect("/");
+});
 
 module.exports = router;
-
 
 function genPassword(password) {
   var salt = crypto.randomBytes(32).toString("hex");
