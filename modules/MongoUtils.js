@@ -1,4 +1,5 @@
 const mongodb = require("mongodb");
+// require("dotenv").config();
 
 const MongoClient = mongodb.MongoClient;
 function MongoUtils() {
@@ -66,7 +67,7 @@ function MongoUtils() {
 
   mu.feeds.getPages = () => {
     return mu.connect()
-      .then(client=>{
+      .then(client => { 
         const feeds = client.db(DB_NAME).collection("Feed");
         return feeds.estimatedDocumentCount()
           .finally(() => client.close());

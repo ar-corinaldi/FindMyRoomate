@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Talk from 'talkjs';
+// require("dotenv").config();
 
 class Chat extends Component {
 
