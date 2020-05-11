@@ -5,7 +5,6 @@ const logger = require("morgan");
 
 const passportRoutes = require("./routes/passportRoutes");
 const configurePassport = require("./modules/Passport");
-require("dotenv").config();
 
 const app = express();
 
