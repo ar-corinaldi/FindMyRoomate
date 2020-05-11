@@ -8,7 +8,7 @@ function Profile(props) {
 
   return (
     <div>
-      <div className="col-lg-6">
+      <div className="col-lg-6 bg-light">
         <div className="p-5">
           <div className="text-center">
             <h1 className="h4 text-gray-900 mb-4">Add your Offer!</h1>
@@ -41,7 +41,7 @@ function Profile(props) {
                 ref={refPrice}
               />
             </div>
-            <div className="form-group input-group">
+            <div className="form-group input-group col-md-12">
               <label className="label-input" htmlFor="description">
                 Description
               </label>
