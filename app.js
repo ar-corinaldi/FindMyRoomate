@@ -1,23 +1,23 @@
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 
-const passportRoutes = require('./routes/passportRoutes');
+const passportRoutes = require("./routes/passportRoutes");
 const configurePassport = require("./modules/Passport");
 require("dotenv").config();
 
 const app = express();
 
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, "front/build")));
-app.use(express.static(path.join(__dirname, "front/public")));
+app.use(express.static(path.join(__dirname, "front/build")));
+// app.use(express.static(path.join(__dirname, "front/public")));
 
 configurePassport(app);
 
-app.use('/', passportRoutes);
+app.use("/", passportRoutes);
 
 module.exports = app;

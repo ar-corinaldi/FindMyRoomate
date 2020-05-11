@@ -65,13 +65,26 @@ function MongoUtils() {
 
   mu.feeds = {};
 
-  mu.feeds.findAll = () => {
+  mu.feeds.getPages = () => {
+    return mu.connect()
+      .then(client=>{
+        const feeds = client.db(DB_NAME).collection("Feed");
+        return feeds.estimatedDocumentCount()
+          .finally(() => client.close());
+      });
+  };
+
+  mu.feeds.findAll = (pageNumber, nPerPage) => {
+    if(!pageNumber) pageNumber=1;
+    if(!nPerPage) nPerPage = 10;
     return mu.connect().then((client) => {
       const feeds = client.db(DB_NAME).collection("Feed");
       const query = {};
 
       return feeds
         .find(query)
+        .skip( pageNumber > 0 ? ( ( pageNumber - 1 ) * nPerPage ) : 0 )
+        .limit(nPerPage)
         .toArray()
         .finally(() => client.close());
     });
