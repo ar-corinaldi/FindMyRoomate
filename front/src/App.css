@@ -11,3 +11,25 @@
 #thisCards .card {
   max-width: 18rem;
 }
+.Navbar{
+  color: purple;
+  background-color: purple;
+}
+
+.go-but{
+  background: #0e9bb4;
+  color: white;
+  width: 80px;
+  height: 30px;
+  margin: 5px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  font-size: 11px;
+  line-height: 32px;
+  text-transform: uppercase;
+}
+
+.container{
+padding: 4rem;
+}

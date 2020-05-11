@@ -34,13 +34,17 @@ function Feed(props) {
           <a href="#" className="card-link">
             {element.availability? "Available" : "No Available"}
           </a>
+
+          <a href="/chat" className="card-link">
+            Enviar un mensaje
+          </a>
         </div>
       </div>
     )))
   }
   return (
     <div>
-      This my feed!
+      Current Offers
       <div id="thisCards">
         {renderFeed()}
       </div>

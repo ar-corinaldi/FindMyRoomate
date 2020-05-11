@@ -8,11 +8,10 @@ function Profile(props) {
 
   return (
     <div>
-      Hello Profile
       <div className="col-lg-6">
         <div className="p-5">
           <div className="text-center">
-            <h1 className="h4 text-gray-900 mb-4">Add your feed!</h1>
+            <h1 className="h4 text-gray-900 mb-4">Add your Offer!</h1>
           </div>
 
           <form method="POST" action="/feed">
@@ -55,7 +54,7 @@ function Profile(props) {
               >
               </textarea>
             </div>
-            <button type="submit">
+            <button className="go-but" type="submit">
               Create
             </button>
           </form>

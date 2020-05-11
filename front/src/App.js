@@ -6,6 +6,7 @@ import Register from "./components/Register";
 import Feed from "./components/Feed";
 import Profile from "./components/Profile";
 import Logout from "./components/Logout";
+import Chat from "./components/Chat";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -28,8 +29,7 @@ function App() {
       <div className="App">
         <Navbar user={user} setUser={setUser} />
         <div className="container">
-          <h1>Hello {user ? user.name : "World"}!</h1>
-          <button onClick={click}>Click here</button>
+      
           <Switch>
             {!user ? (
               <Route path="/" exact component={() => <Login />} />
@@ -48,6 +48,8 @@ function App() {
               <Route path="/profile" exact component={() => <Profile user={user}/>} />
             )}
             <Route path="/logout" exact component={() => <Logout setUser={setUser}/>} />
+
+            <Route path="/chat" exact component={() => <Chat user={user} setUser={setUser}/>} />
           </Switch>
         </div>
       </div>

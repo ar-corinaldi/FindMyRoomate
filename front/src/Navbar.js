@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 function Navbar(props) {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-info text-white">
         <a className="navbar-brand" href="/">
-          Navbar
+          FindMyRoommate
         </a>
         <button
           className="navbar-toggler"
@@ -25,11 +25,13 @@ function Navbar(props) {
               Home <span className="sr-only">(current)</span>
             </a>
             </Link>
-            <a className="nav-item nav-link">Features</a>
-            <a className="nav-item nav-link">Pricing</a>
+         
+            {props.user? <Link to="/chat"><a className="nav-item nav-link active">Messages</a></Link>
+            : ""}
+
             {props.user ? (
               <Link to="/profile">
-                <a className="nav-item nav-link active">Profile</a>
+                <a className="nav-item nav-link active">Add Offer</a>
               </Link>
             ) : (
               <Link to="/login">
