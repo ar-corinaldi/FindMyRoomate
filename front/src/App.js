@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const [user, setUser] = useState(undefined);
+  const [pages, setPages] = useState(0);
   useEffect(() => {
     fetch("/getUser", { credentials: "include" })
       .then((res) => res.json())
@@ -18,6 +19,12 @@ function App() {
     console.log(user);
 
   }, []);
+
+  useEffect(() => {
+    fetch("/pagesFeed")
+      .then(res => res.json())
+      .then(newPages => setPages(newPages));
+  },[]);
 
   const click = () => {
     console.log("Redirect");
@@ -29,12 +36,11 @@ function App() {
       <div className="App">
         <Navbar user={user} setUser={setUser} />
         <div className="container">
-      
           <Switch>
             {!user ? (
               <Route path="/" exact component={() => <Login />} />
             ) : (
-              <Route path="/" exact component={() => <Feed />} />
+              <Route path="/" exact component={() => <Feed pages={pages} setPages={setPages}/>} />
             )}
             <Route
               path="/login"

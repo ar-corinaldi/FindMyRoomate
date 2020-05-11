@@ -25,7 +25,7 @@ class Chat extends Component {
 
                 if (!window.talkSession) {
                     window.talkSession = new Talk.Session({
-                        appId: process.env.api_key,
+                        appId: process.env.REACT_APP_API_KEY,
                         me: me
                     });
                 }

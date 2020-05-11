@@ -77,6 +77,11 @@ router.post("/feed", (req, res) => {
   else res.redirect("/");
 });
 
+router.get("/pagesFeed", (req,res) => {
+  mongo.feeds.getPages()
+    .then( numPages => res.json(numPages));
+});
+
 module.exports = router;
 
 function genPassword(password) {
