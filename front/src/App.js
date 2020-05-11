@@ -17,7 +17,8 @@ function App() {
       .then((res) => res.json())
       .then((user) => setUser(user));
     console.log(user);
-
+    // Code review from antoine noreau: Creo que el user no estara updated cuando el console.log le print.
+    // Se podria setUser aqui y continuar con en setPages en el segundo, con un [user].
   }, []);
 
   useEffect(() => {
@@ -25,6 +26,7 @@ function App() {
       .then(res => res.json())
       .then(newPages => setPages(newPages));
   },[]);
+  // Aca se podria terminar por }, [user]);, para llamar el fetch solamente cuando el user cambia.
 
   const click = () => {
     console.log("Redirect");
