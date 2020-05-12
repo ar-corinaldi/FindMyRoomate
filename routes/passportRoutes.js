@@ -27,6 +27,7 @@ router.get("/logout", function (req, res) {
   res.redirect("/");
 });
 
+//Valentina Chacon: seria importante manejar la lógica de passport en un archivo diferente al de las rutas. Además eliminar los console.log
 router.post("/register", (req, res) => {
   console.log("Req del POST", req.body);
   if (req.body.password !== req.body.password2Register) {
