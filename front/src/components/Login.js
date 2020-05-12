@@ -62,6 +62,7 @@ function Login(props) {
                       className="label-input"
                       to="/register"
                     >
+                      {/* En ingles no deberian incluir ¿ al inicio de la pregunta */}
                       ¿Don't have an account? Sign up
                     </Link>
                   </div>
