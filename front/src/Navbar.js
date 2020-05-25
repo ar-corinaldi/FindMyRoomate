@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import room from "./components/location.png";
 function Navbar(props) {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-info text-white">
+      <nav className="navbar navbar-expand-lg navbar-light fixed-top">
         <a className="navbar-brand" href="/">
-          FindMyRoommate
+        <img src={room} width="35" height="35"/> Room8
         </a>
         <button
           className="navbar-toggler"
@@ -20,7 +20,7 @@ function Navbar(props) {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div className="navbar-nav">
+          <div className="navbar-nav ml-auto">
             <Link to="/"><a className="nav-item nav-link active">
               Home <span className="sr-only">(current)</span>
             </a>

@@ -20,7 +20,7 @@ function Register(props) {
                   <img
                     width="450"
                     height="740"
-                    src="https://user-images.githubusercontent.com/26877363/79059153-6ace2c00-7c3c-11ea-923f-9ba0cc1e7a50.jpg"
+                    src="https://user-images.githubusercontent.com/26877363/81580679-5e400f00-9373-11ea-92ee-fbc1f92df077.jpg"
                     alt="Prendas de vestir"
                   ></img>
                 </div>
@@ -111,7 +111,7 @@ function Register(props) {
                           required
                         />
                       </div>
-                      <button type="submit" className="shop-go">
+                      <button type="submit" className="go-but">
                         Submit
                       </button>
                     </form>

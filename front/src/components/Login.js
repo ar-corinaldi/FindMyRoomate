@@ -16,7 +16,7 @@ function Login(props) {
                 <img
                   width="450"
                   height="600"
-                  src="https://user-images.githubusercontent.com/26877363/79059180-9ea95180-7c3c-11ea-9408-02121b258842.jpg"
+                  src="https://user-images.githubusercontent.com/26877363/81580636-4f595c80-9373-11ea-834a-b6acc18583ae.jpg"
                   alt="Prendas de vestir"
                 ></img>
               </div>
@@ -52,7 +52,7 @@ function Login(props) {
                         required
                       />
                     </div>
-                    <button type="submit" className="shop-go">
+                    <button type="submit" className="go-but">
                       Submit
                     </button>
                   </form>

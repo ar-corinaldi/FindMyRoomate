@@ -10,10 +10,37 @@
 
 #thisCards .card {
   max-width: 18rem;
+  min-width: 20rem;
+  max-height: 52rem;
 }
 .Navbar{
-  color: purple;
-  background-color: purple;
+color: white;
+background-color: white;
+background: white;
+}
+.navbar-brand{
+  font-family: 'Pacifico', cursive;
+  font-size: x-large;
+}
+.navbar-nav{
+
+  font-family: 'Raleway', sans-serif;
+}
+
+h1,h2,h3,h4,h5,p{
+  font-family: 'Raleway', sans-serif;
+}
+h6{
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+}
+.button {     
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;    
+      
 }
 
 .go-but{

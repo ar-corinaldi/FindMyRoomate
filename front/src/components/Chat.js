@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Talk from 'talkjs';
-
+require("dotenv").config();
 class Chat extends Component {
 
   
@@ -8,62 +8,50 @@ class Chat extends Component {
         super(props);
         
         this.inbox = undefined;
-    }
 
-    componentDidMount() {
-        // Promise can be `then`ed multiple times
-        Talk.ready
-            .then(() => {
-                const me = new Talk.User({
-                    id: "12345231",
-                    name: "George Looney",
-                    email: "george@looney.net",
-                    photoUrl: "https://talkjs.com/docs/img/george.jpg",
-                    welcomeMessage: "Hey there! How are you? :-)"
-                });
+        let currentUser=props.user;
+       
 
-                if (!window.talkSession) {
-                    window.talkSession = new Talk.Session({
-                        appId: process.env.REACT_APP_API_KEY,
-                        me: me
-                    });
-                }
-
-                const other = new Talk.User({
-                    id: "54321",
-                    name: "Ronald Raygun",
-                    email: "ronald@teflon.com",
-                    photoUrl: "https://talkjs.com/docs/img/ronald.jpg",
-                    welcomeMessage: "Hey there! Love to chat :-)"
-                });
-
-                // You control the ID of a conversation. oneOnOneId is a helper method that generates
-                // a unique conversation ID for a given pair of users. 
-                const conversationId = Talk.oneOnOneId(me, other);
-            
-                const conversation = window.talkSession.getOrCreateConversation(conversationId);
-                conversation.setParticipant(me);
-                conversation.setParticipant(other);
-            
-                this.inbox = window.talkSession.createInbox({
-                    selected: conversation
-                });
-                this.inbox.mount(this.container);
-
-            })
-            .catch(e => console.error(e));
-    }
-
-    componentWillUnmount() {
-        if (this.inbox) {
-            this.inbox.destroy();
+        this.state = {
+            currentUser
         }
-    }
+    }       
+    componentDidMount() {
+        console.log(this.state.currentUser)
+            Talk.ready
+                .then(() => {
+                    const me = new Talk.User({
+                        id: this.state.currentUser._id,
+                        name: this.state.currentUser.username,
+                        email: this.state.currentUser.email,
+                        photoUrl: "https://randomuser.me/api/portraits/men/32.jpg",
+                        welcomeMessage: "Hey there! Love to chat :-)"
+                    });
+                    
+                    if (!window.talkSession) {
+                        window.talkSession = new Talk.Session({
+                            appId: "tknEJI1i",
+                            me: me
+                        });
+                    }
+
+            
+
+                
+                    this.inbox = window.talkSession.createInbox();
+                    this.inbox.mount(this.container);
+      
+                })
+                .catch(e => console.error(e));
+        }
 
     render() {
-        return (<span>
-            <div style={{height: '500px'}} ref={c => this.container = c}>Loading...</div>
-        </span>);
+        return (
+            <React.Fragment>
+            <div style={{height: '500px'}} className="inbox-container" ref={c => this.container = c}>Loading...</div>
+        </React.Fragment>
+    
+        );
     }
 } 
 export default Chat;

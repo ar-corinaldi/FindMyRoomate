@@ -13,7 +13,11 @@ function App() {
   const [user, setUser] = useState(undefined);
   const [pages, setPages] = useState(0);
   useEffect(() => {
-    fetch("/getUser", { credentials: "include" })
+    fetch("/getUser", {   mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      credentials: "include"
+    } })
       .then((res) => res.json())
       .then((user) => setUser(user));
     console.log(user);
@@ -40,7 +44,7 @@ function App() {
             {!user ? (
               <Route path="/" exact component={() => <Login />} />
             ) : (
-              <Route path="/" exact component={() => <Feed pages={pages} setPages={setPages}/>} />
+              <Route path="/" exact component={() => <Feed user={user} setUser={setUser} pages={pages} setPages={setPages}/>} />
             )}
             <Route
               path="/login"
