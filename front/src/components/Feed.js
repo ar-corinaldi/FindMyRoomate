@@ -64,7 +64,7 @@ function Feed(props) {
           ""
         ) : (
           <Pagination
-            count={props.pages}
+            count={parseInt(props.pages/10)}
             page={pageNumber}
             defaultPage={1}
             onChange={handleChange}

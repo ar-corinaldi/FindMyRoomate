@@ -6,10 +6,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
 }
 
 #thisCards .card {
   max-width: 18rem;
+  margin-top: 7%;
 }
 .Navbar{
   color: purple;

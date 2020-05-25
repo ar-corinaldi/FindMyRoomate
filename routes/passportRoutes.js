@@ -3,7 +3,6 @@ var router = express.Router();
 const passport = require("passport");
 const crypto = require("crypto");
 const mongo = require("../modules/MongoUtils");
-// require("dotenv").config();
 
 /* GET users listing. */
 router.get("/", function (req, res) {
@@ -73,7 +72,7 @@ router.post("/feed", (req, res) => {
     req.body.user = req.user.username;
     req.body.availability = true;
     mongo.feeds.insert(req.body);
-    res.redirect("/feed");
+    res.redirect("/");
   }
   else res.redirect("/");
 });
