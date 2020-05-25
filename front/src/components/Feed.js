@@ -58,13 +58,13 @@ function Feed(props) {
   return (
     <div>
       Current Offers
-      <div id="thisCards">{renderFeed()}</div>
-      <div>
+      <div id="theseCards">{renderFeed()}</div>
+      <div id="pagination">
         {!feed ? (
           ""
         ) : (
           <Pagination
-            count={parseInt(props.pages/10)}
+            count={Math.ceil(props.pages/9)}
             page={pageNumber}
             defaultPage={1}
             onChange={handleChange}

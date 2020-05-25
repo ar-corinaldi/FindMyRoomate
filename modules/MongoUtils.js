@@ -76,7 +76,7 @@ function MongoUtils() {
 
   mu.feeds.findAll = (pageNumber, nPerPage) => {
     if(!pageNumber) pageNumber=1;
-    if(!nPerPage) nPerPage = 10;
+    if(!nPerPage) nPerPage = 9;
     return mu.connect().then((client) => {
       const feeds = client.db(DB_NAME).collection("Feed");
       const query = {};
