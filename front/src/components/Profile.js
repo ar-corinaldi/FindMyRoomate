@@ -14,14 +14,14 @@ function Profile(props) {
             <h1 className="h4 text-gray-900 mb-4">Add your Offer!</h1>
           </div>
 
-          <form method="POST" action="/feed">
+          <form method="POST" action="/feed" encType="multipart/form-data">
             <div className="form-group">
               <label className="label-input" htmlFor="image">
                 Image
               </label>
               <input
                 className="form-control"
-                type="text"
+                type="file"
                 name="image"
                 id="image"
                 ref={refImage}

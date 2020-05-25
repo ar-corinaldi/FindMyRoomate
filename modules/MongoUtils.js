@@ -91,6 +91,7 @@ function MongoUtils() {
   };
 
   mu.feeds.insert = (query) => {
+    console.log("Query for posting a feed",query);
     return mu.connect().then((client) => {
       const feeds = client.db(DB_NAME).collection("Feed");
       console.log("THIS IS INSERT FEED", query);

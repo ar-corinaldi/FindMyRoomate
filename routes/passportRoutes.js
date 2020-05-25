@@ -1,9 +1,16 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const passport = require("passport");
 const crypto = require("crypto");
 const mongo = require("../modules/MongoUtils");
-
+const AWS = require("../S3Lib/s3");
+const multer = require("multer");
+const storage = multer.memoryStorage({
+  destination: (req, file, cb) => {
+    cb(null, "");
+  },
+});
+const upload = multer({ storage: storage });
 /* GET users listing. */
 router.get("/", function (req, res) {
   res.send("Ping prueba");
@@ -66,34 +73,35 @@ router.get("/loadFeed", (req, res) => {
   });
 });
 
-router.post("/feed", (req, res) => {
-  // console.log("THIS IS MY REQBODY",req.body);
+router.post("/feed", upload.single("image"), async (req, res) => {
+  console.log("req.file", req.file);
   if (req.user) {
     req.body.user = req.user.username;
     req.body.availability = true;
-    mongo.feeds.insert(req.body);
-    res.redirect("/");
-  }
-  else res.redirect("/");
+    const fileName = req.user.username + "_" + req.file.originalname;
+    const fileContent = req.file.buffer;
+    const data = await AWS.upload(fileName, fileContent); 
+    req.body.image = data.Location;
+    console.log(data.Location);
+    mongo.feeds.insert(req.body).finally(() => res.redirect("/"));
+  } else res.redirect("/");
 });
 
-router.get("/pageFeed/:pageNumber", (req,res) => {
+router.get("/pageFeed/:pageNumber", (req, res) => {
   console.log(req.params);
   console.log(req.param);
-  mongo.feeds.findAll(req.params.pageNumber, 10)
-    .then(data => res.json(data));
+  mongo.feeds.findAll(req.params.pageNumber, 10).then((data) => res.json(data));
 });
 
-router.get("/pagesFeed", (req,res) => {
-  mongo.feeds.getPages()
-    .then( numPages => res.json(numPages));
+router.get("/pagesFeed", (req, res) => {
+  mongo.feeds.getPages().then((numPages) => res.json(numPages));
 });
 
 module.exports = router;
 
 function genPassword(password) {
-  var salt = crypto.randomBytes(32).toString("hex");
-  var genHash = crypto
+  const salt = crypto.randomBytes(32).toString("hex");
+  const genHash = crypto
     .pbkdf2Sync(password, salt, 10000, 64, "sha512")
     .toString("hex");
 
