@@ -7,6 +7,7 @@
     "heroku-postbuild": "cd front && yarn install && yarn run build"
   },
   "dependencies": {
+    "babel": "^6.23.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -18,6 +19,8 @@
     "morgan": "~1.9.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "react-js-pagination": "^3.0.3",
+    "react-pagination": "^1.0.0",
     "stream-chat-react": "^0.12.0",
     "talkjs": "^0.14.2"
   },

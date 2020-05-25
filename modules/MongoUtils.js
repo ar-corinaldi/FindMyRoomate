@@ -1,5 +1,5 @@
 const mongodb = require("mongodb");
-
+require("dotenv").config();
 const MongoClient = mongodb.MongoClient;
 function MongoUtils() {
   const mu = {};
@@ -95,6 +95,15 @@ function MongoUtils() {
       console.log("THIS IS INSERT FEED", query);
       return feeds.insertOne(query).finally(() => client.close());
     });
+  };
+
+  mu.users.findAll = () => {
+    return mu.connect()
+      .then(client => {
+        const users = client.db(DB_NAME).collection("Users");
+        const query = {};
+        return users.find(query).toArray().finally( () => client.close() );
+      });
   };
 
   return mu;

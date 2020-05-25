@@ -82,6 +82,14 @@ router.get("/pagesFeed", (req,res) => {
     .then( numPages => res.json(numPages));
 });
 
+router.get("/getUsers2", (req,res) => {
+  console.log("DANIELLA FELIZ CUMPLEAÑOS");
+  mongo.users.findAll()
+    .then((data )=> {console.log("Ussers", data); 
+      res.json(data);
+    });
+});
+
 module.exports = router;
 
 function genPassword(password) {
