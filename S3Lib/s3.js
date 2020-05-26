@@ -1,5 +1,5 @@
 const AWS = require("aws-sdk");
-require("dotenv").config();
+// require("dotenv").config();
 
 function AWSUtils() {
   const mu = {};
