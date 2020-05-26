@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import StepperForm from "./StepperForm";
 
 function Profile(props) {
   const refPrice = useRef();
@@ -7,7 +8,8 @@ function Profile(props) {
   const refImage = useRef();
 
   return (
-    <div>
+    <div className="container">
+      <StepperForm></StepperForm>
       <div className="col-lg-6 bg-light">
         <div className="p-5">
           <div className="text-center">

@@ -30,7 +30,7 @@ function Login(props) {
                   <form method="POST" action="/login">
                     <div className="form-group">
                       <label className="label-input" htmlFor="username">
-                        Username
+                      <p>Username</p>
                       </label>
                       <input
                         className="form-control"
@@ -42,7 +42,7 @@ function Login(props) {
                     </div>
                     <div className="form-group">
                       <label className="label-input" htmlFor="password">
-                        Password
+                        <p>Password</p>
                       </label>
                       <input
                         type="password"
@@ -52,7 +52,7 @@ function Login(props) {
                         required
                       />
                     </div>
-                    <button type="submit" className="go-but">
+                    <button type="submit" className="btn">
                       Submit
                     </button>
                   </form>
@@ -62,7 +62,7 @@ function Login(props) {
                       className="label-input"
                       to="/register"
                     >
-                      ¿Don't have an account? Sign up
+                      <p>Don't have an account? Sign up</p>
                     </Link>
                   </div>
                 </div>
