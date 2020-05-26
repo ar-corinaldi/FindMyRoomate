@@ -1,7 +1,23 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "./UserProfile.css";
 
-function UserProfile(props) {
+
+
+function UserProfile({match}) {
+
+    const [profile,setProfile]= useState({});
+    console.log(match);
+    const elprofile= match.params.userProfile;
+    console.log("lo que ",elprofile);
+
+    useEffect(() => {
+    fetch(`/profile/${match.params.userProfile}`)
+          .then(res => res.json())
+          .then(newprofile => setProfile(newprofile));
+      },[]);
+    
+
+
   return (
       <div>
 <div class="card-container">
@@ -14,14 +30,16 @@ function UserProfile(props) {
 
 <div class="lower-container">
     <div>
-        <h3>Alaina Wick</h3>
-        <h4>Front-end Developer</h4>
+    <h3>{profile.username}</h3>
+        <h4>{profile.occupation}</h4>
     </div>
     <div>
-        <p>sodales accumsan ligula. Aenean sed diam tristique, fermentum mi nec, ornare arcu.</p>
+    <p>Age:{profile.age}</p>
+    <p>Genre: {profile.genre}</p>
+        <p>{profile.description}</p>
     </div>
     <div>
-        <a href="#" class="btn">View profile</a>
+        <a href="#" class="btn">Contact me</a>
     </div>
 </div>
 

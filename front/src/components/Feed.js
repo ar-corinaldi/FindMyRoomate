@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Pagination from "react-js-pagination";
-import dummyUsers from './User';
 import Talk from 'talkjs';
 import SearchBar from "./SearchBar";
 import location from "./placeholder.png";
 import message from "./mesaage.png";
-
-function Feed(props) {
-
-  const [feed, setFeed] = useState([]);
+import {Link } from "react-router-dom";
+import Pagination from "@material-ui/lab/Pagination";
+  
+  function Feed(props) {
+    const [feed, setFeed] = useState(undefined);
+  
   const [pageNumber, setPageNumber] = useState(1);
   const [users, setUsers] = useState([]);
 
@@ -30,9 +30,11 @@ function Feed(props) {
   };
 
 
-  const handlePageChange = (newCurrent) => {
+  const handleChange = async (event, newCurrent) => {
     setPageNumber(newCurrent);
-    // fetch("/pagesFeed");
+    const res = await fetch(`/pageFeed/${newCurrent}`);
+    const newFeed = await res.json();
+    setFeed(newFeed);
   };
 
   const handleClick= (userName)=> {
@@ -83,6 +85,8 @@ function Feed(props) {
 
         this.chatbox = window.talkSession.createChatbox(conversation);
         this.chatbox.mount(this.container);
+        console.log(this);
+        console.log(this.container);
         
         
     })            
@@ -92,8 +96,10 @@ function Feed(props) {
 
   const renderFeed = () => {
     console.log("What is this?", feed);
+    if (!feed) return "";
+    else
     return feed.map((element) => (
-      <div key={element.id} className="card mt-4  d-flex align-items-stretch">
+      <div key={element.id} className="card mt-5">
         <img
           className="card-img-top"
           src={element.image}
@@ -111,9 +117,12 @@ function Feed(props) {
       
         </ul>
         <div className="card-body">
-          <a href="#" className="card-link">
+        <Link to={`/user/${element.user}`} >
+          <a className="card-link">
             {element.user}
           </a>
+          </Link>
+
           <h5>
             {element.availability ? "Available" : "No Available"}
           </h5>
@@ -124,6 +133,7 @@ function Feed(props) {
   };
 
   return (
+    
     <div>
   
       <section> 
@@ -131,15 +141,21 @@ function Feed(props) {
         <SearchBar></SearchBar>
       </section>
       <div id="thisCards">{renderFeed()}</div>
-      <div>
-        <Pagination
-          activePage={pageNumber}
-          itemsCountPerPage={10}
-          totalItemsCount={props.pages}
-          onChange={handlePageChange}
-        />
+      <div id="pagination">
+        {!feed ? (
+          ""
+        ) : (
+          <Pagination
+            count={Math.ceil(props.pages/9)}
+            page={pageNumber}
+            defaultPage={1}
+            onChange={handleChange}
+            showFirstButton
+            showLastButton
+          />
+        )}
       </div>
-      <div className="chatbox-container" ref={c => this.container = c} >
+      <div className="chatbox-container" >
             <div id="talkjs-container" style={{height: "300px"}}><i></i></div>
          </div>
       </div>

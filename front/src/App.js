@@ -7,17 +7,14 @@ import Feed from "./components/Feed";
 import Profile from "./components/Profile";
 import Logout from "./components/Logout";
 import Chat from "./components/Chat";
+import UserProfile from "./components/UserProfile";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const [user, setUser] = useState(undefined);
   const [pages, setPages] = useState(0);
   useEffect(() => {
-    fetch("/getUser", {   mode: "cors",
-    headers: {
-      "Content-Type": "application/json",
-      credentials: "include"
-    } })
+    fetch("/getUser", { credentials: "include" })
       .then((res) => res.json())
       .then((user) => setUser(user));
     console.log(user);
@@ -60,6 +57,9 @@ function App() {
             <Route path="/logout" exact component={() => <Logout setUser={setUser}/>} />
 
             <Route path="/chat" exact component={() => <Chat user={user} setUser={setUser}/>} />
+
+            <Route path="/user/:userProfile" component={UserProfile} />
+
           </Switch>
         </div>
       </div>

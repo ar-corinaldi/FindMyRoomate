@@ -2,17 +2,26 @@
   text-align: center;
 }
 
-#thisCards {
+#theseCards {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
 }
 
-#thisCards .card {
+#theseCards .card {
   max-width: 18rem;
   min-width: 20rem;
   max-height: 52rem;
+  margin-top: 7%;
 }
+
+#pagination {
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+}
+
 .Navbar{
 color: white;
 background-color: white;

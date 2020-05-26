@@ -36,6 +36,16 @@ function MongoUtils() {
     });
   };
 
+  mu.users.findByUsername2 = (username) => {
+    return mu.connect().then((client) => {
+      const users = client.db(DB_NAME).collection("Users");
+      const query = { username };
+      return users
+        .findOne(query)
+        .finally(() => client.close());
+    });
+  };
+
   mu.users.findByUsername = (username, cb) => {
     return mu.connect().then((client) => {
       const users = client.db(DB_NAME).collection("Users");
@@ -66,7 +76,7 @@ function MongoUtils() {
 
   mu.feeds.getPages = () => {
     return mu.connect()
-      .then(client=>{
+      .then(client => { 
         const feeds = client.db(DB_NAME).collection("Feed");
         return feeds.estimatedDocumentCount()
           .finally(() => client.close());
@@ -75,7 +85,7 @@ function MongoUtils() {
 
   mu.feeds.findAll = (pageNumber, nPerPage) => {
     if(!pageNumber) pageNumber=1;
-    if(!nPerPage) nPerPage = 10;
+    if(!nPerPage) nPerPage = 9;
     return mu.connect().then((client) => {
       const feeds = client.db(DB_NAME).collection("Feed");
       const query = {};
@@ -90,6 +100,7 @@ function MongoUtils() {
   };
 
   mu.feeds.insert = (query) => {
+    console.log("Query for posting a feed",query);
     return mu.connect().then((client) => {
       const feeds = client.db(DB_NAME).collection("Feed");
       console.log("THIS IS INSERT FEED", query);
