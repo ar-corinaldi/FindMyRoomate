@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Talk from 'talkjs';
-require("dotenv").config();
+//require("dotenv").config();
 class Chat extends Component {
 
   
@@ -30,7 +30,7 @@ class Chat extends Component {
                     
                     if (!window.talkSession) {
                         window.talkSession = new Talk.Session({
-                            appId: "tknEJI1i",
+                            appId: process.env.REACT_APP_API_KEY,
                             me: me
                         });
                     }
