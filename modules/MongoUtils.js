@@ -117,6 +117,23 @@ function MongoUtils() {
       });
   };
 
+
+  mu.listenForChanges = () => {
+    const col = "Feed"
+    console.log("Listening to changes in the collection",col);
+    return mu.connect()
+      .then(client => {
+        const cursor = client.db(DB_NAME)
+          .collection(col)
+          .watch();
+        
+          cursor.on("change", (data) => {
+            console.log("Change in", col, data);    
+          });
+      })
+  }
+
+
   return mu;
 }
 

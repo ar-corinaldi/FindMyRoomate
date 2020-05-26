@@ -6,9 +6,7 @@ import "./UserProfile.css";
 function UserProfile({match}) {
 
     const [profile,setProfile]= useState({});
-    console.log(match);
     const elprofile= match.params.userProfile;
-    console.log("lo que ",elprofile);
 
     useEffect(() => {
     fetch(`/profile/${match.params.userProfile}`)

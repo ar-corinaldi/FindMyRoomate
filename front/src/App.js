@@ -13,11 +13,24 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
   const [user, setUser] = useState(undefined);
   const [pages, setPages] = useState(0);
+  
+  const setupWS = () => {
+    const url = process.env.BACKEND || "ws://localhost:8000";
+    const ws = new WebSocket(url);
+    ws.onopen = () => {
+      // console.log("Websocket client connected");
+      ws.onmessage = (msg) => {
+        // console.log("WS got message", msg);
+      }
+    };
+  };
+  
   useEffect(() => {
+    setupWS();
+
     fetch("/getUser", { credentials: "include" })
       .then((res) => res.json())
       .then((user) => setUser(user));
-    console.log(user);
 
   }, []);
 
@@ -28,7 +41,6 @@ function App() {
   },[]);
 
   const click = () => {
-    console.log("Redirect");
     fetch("/login");
   };
 
