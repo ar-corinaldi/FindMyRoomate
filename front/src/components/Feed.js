@@ -56,7 +56,7 @@ import Pagination from "@material-ui/lab/Pagination";
           name: props.user.username,
           email: props.user.email,
           photoUrl: "https://talkjs.com/docs/img/george.jpg",
-          welcomeMessage: ""
+          welcomeMessage: " "
       });
 
         const other = new Talk.User({         
@@ -64,13 +64,13 @@ import Pagination from "@material-ui/lab/Pagination";
           name: user.username,
           email: user.email,
           photoUrl: "https://talkjs.com/docs/img/george.jpg",
-          welcomeMessage: ""
+          welcomeMessage: " "
       });
 
         /* Create a talk session if this does not exist. Remember to replace tthe APP ID with the one on your dashboard */
        
             window.talkSession = new Talk.Session({
-                appId: process.env.REACT_APP_API_KEY,
+                appId: "tknEJI1i",
                 me: me
             });
        
@@ -135,15 +135,16 @@ import Pagination from "@material-ui/lab/Pagination";
   return (
     
     <div>
-  
       <section> 
         <h3>Current Offers</h3>
         <SearchBar></SearchBar>
       </section>
-      <div className="chatbox-container" ref={chatContainerRef}>
-            <div id="talkjs-container" style={{height: "300px"}}><i></i></div>
-         </div>
+        
+    <div className="chatbox-container" ref={chatContainerRef}>
+      <div id="talkjs-container" style={{height: "300px"}}><i></i></div>
+      </div>
       <div id="thisCards">{renderFeed()}</div>
+      
       <div id="pagination">
         {!feed ? (
           ""

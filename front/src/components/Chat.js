@@ -30,7 +30,7 @@ class Chat extends Component {
                     
                     if (!window.talkSession) {
                         window.talkSession = new Talk.Session({
-                            appId: process.env.REACT_APP_API_KEY,
+                            appId: "tknEJI1i",
                             me: me
                         });
                     }
@@ -47,10 +47,11 @@ class Chat extends Component {
 
     render() {
         return (
+            <div className="container">
             <React.Fragment>
             <div style={{height: '500px'}} className="inbox-container" ref={c => this.container = c}>Loading...</div>
         </React.Fragment>
-    
+        </div>
         );
     }
 } 
