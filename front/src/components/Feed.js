@@ -70,7 +70,7 @@ import Pagination from "@material-ui/lab/Pagination";
         /* Create a talk session if this does not exist. Remember to replace tthe APP ID with the one on your dashboard */
        
             window.talkSession = new Talk.Session({
-                appId: "tknEJI1i",
+                appId: process.env.REACT_APP_API_KEY,
                 me: me
             });
        
