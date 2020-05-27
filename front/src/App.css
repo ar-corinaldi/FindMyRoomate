@@ -42,7 +42,7 @@ background: white;
   font-family: 'Raleway', sans-serif;
 }
 
-h1,h2,h3,h4,h5,p{
+h1,h2,h3,h4,h5,p, label{
   font-family: 'Raleway', sans-serif;
 }
 h6{
@@ -74,4 +74,16 @@ h6{
 
 .container{
 padding: 4rem;
+}
+
+.btn{
+	padding: 12px 20px;
+	background: #7F00FF;
+	border: none;
+	color: white;
+	border-radius: 30px;
+	font-size: 12px;
+	text-decoration: none;
+	font-weight: bold;
+	transition: all .3s ease-in;
 }

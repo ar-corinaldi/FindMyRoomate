@@ -9,6 +9,7 @@ import Logout from "./components/Logout";
 import Chat from "./components/Chat";
 import UserProfile from "./components/UserProfile";
 import MyProfile from "./components/MyProfile";
+import Welcome from "./components/Welcome";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -49,11 +50,13 @@ function App() {
       <div className="App">
         <Navbar user={user} setUser={setUser} />
         <div className="container">
+          
           <Switch>
+            <Route path="/" exact component={()=> <Welcome user={user} setUser={setUser} />}/>
             {!user ? (
-              <Route path="/" exact component={() => <Login />} />
+              <Route path="/login" exact component={() => <Login />} />
             ) : (
-              <Route path="/" exact component={() => <Feed user={user} setUser={setUser} pages={pages} setPages={setPages}/>} />
+              <Route path="/feed" exact component={() => <Feed user={user} setUser={setUser} pages={pages} setPages={setPages}/>} />
             )}
             <Route
               path="/login"
