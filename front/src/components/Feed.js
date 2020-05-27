@@ -20,7 +20,6 @@ import Pagination from "@material-ui/lab/Pagination";
   useEffect(() => {
     fetch("/getUsers2").then((res) => res.json())
       .then((newusers) => setUsers(newusers));
-    console.log(users);
 
   }, []);
 
@@ -41,12 +40,9 @@ import Pagination from "@material-ui/lab/Pagination";
   const handleClick= (userName)=> {
  
     /* Retrieve the two users that will participate in the conversation */
-   console.log("username",userName);
+  
     const user = users.find(user => user.username === userName)
-   console.log(users);
-    console.log(user);
 
-    console.log(props.user);
     /* Session initialization code */
     Talk.ready
     .then(() => {
@@ -70,7 +66,7 @@ import Pagination from "@material-ui/lab/Pagination";
         /* Create a talk session if this does not exist. Remember to replace tthe APP ID with the one on your dashboard */
        
             window.talkSession = new Talk.Session({
-                appId: process.env.REACT_APP_API_KEY,
+                appId:"tknEJI1i",
                 me: me
             });
        
@@ -86,6 +82,7 @@ import Pagination from "@material-ui/lab/Pagination";
         const chatbox = window.talkSession.createChatbox(conversation);
         chatbox.mount(chatContainerRef.current);
         
+        chatContainerRef.current.focus();
 
         
         
