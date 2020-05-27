@@ -121,8 +121,16 @@ router.get("/profile/:userProfile", (req, res) => {
       users.push(data);
       console.log("THIS IS USERS", users);
       res.json(users);
-    }
-    else res.json(data);
+    } else res.json(data);
+  });
+});
+
+router.get("/search/:text", (req, res) => {
+  let text = req.params.text.replace("-", " ");
+  console.log("ENDPOINT: /seach/" + req.params.text);
+  mongo.feeds.search(text).then((data) => {
+    console.log(data);
+    res.send(JSON.parse(data));
   });
 });
 
