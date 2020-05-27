@@ -1,22 +1,10 @@
 const AWS = require("aws-sdk");
-require("dotenv").config();
+// require("dotenv").config();
 
 function AWSUtils() {
   const mu = {};
 
   mu.verifyCredentials = () => {
-    AWS.config.getCredentials(function (err) {
-      if (err) console.log(err.stack);
-      // credentials not loaded
-      else {
-        console.log("Access key:", AWS.config.credentials.accessKeyId);
-        console.log(
-          "Secret access key:",
-          AWS.config.credentials.secretAccessKey
-        );
-      }
-    });
-  };
 
   s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 

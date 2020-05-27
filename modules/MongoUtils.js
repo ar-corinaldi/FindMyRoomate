@@ -1,5 +1,5 @@
 const mongodb = require("mongodb");
-require("dotenv").config();
+// require("dotenv").config();
 const MongoClient = mongodb.MongoClient;
 function MongoUtils() {
   const mu = {};
@@ -130,7 +130,6 @@ function MongoUtils() {
     return mu.connect().then((client) => {
       const feed = client.db(DB_NAME).collection("Feed");
       const query = { $text: { $search: text } };
-      console.log(query);
       return feed
         .find(query)
         .toArray()

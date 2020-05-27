@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./UserProfile.css";
 import Talk from "talkjs";
+import {Link } from "react-router-dom";
 
 function UserProfile({ match }) {
   const [profile, setProfile] = useState([]);
@@ -29,7 +30,7 @@ function UserProfile({ match }) {
         /* Create a talk session if this does not exist. Remember to replace tthe APP ID with the one on your dashboard */
 
         window.talkSession = new Talk.Session({
-          appId: process.env.REACT_APP_API_KEY||"tknEJI1i",
+          appId: "tknEJI1i",
           me: me,
         });
 
@@ -62,17 +63,17 @@ function UserProfile({ match }) {
   }, []);
 
   return (
-    <div>
-      <div class="card-container">
-        <div class="upper-container">
-          <div class="image-container">
-            <img src="profile.jpg" />
+    <div >
+      <div  ref={chatContainerRef} className="card-container">
+        <div className="upper-container">
+          <div className="image-container">
+            <img src="https://talkjs.com/docs/img/george.jpg" />
           </div>
         </div>
         {profile.length === 0 ? (
           ""
         ) : (
-          <div class="lower-container">
+          <div className="lower-container">
             <div>
               <h3>{profile[1].username}</h3>
               <h4>{profile[1].occupation}</h4>
@@ -83,12 +84,23 @@ function UserProfile({ match }) {
               <p>{profile[1].description}</p>
             </div>
             <div>
-              <button onClick={handleClick}>Contact me</button>
+              <button className="btn" onClick={handleClick}>Contact me</button>
             </div>
           </div>
         )}
+            <div >
+      <div id="talkjs-container" style={{height: "300px"}}><i></i></div>
       </div>
-      <div className="chatbox-container" ref={chatContainerRef}></div>
+      </div>
+    
+  
+
+        <section className="container">
+        <Link to="/feed" >
+          <button className="btn" aria-label="back">Back</button>
+          </Link>
+        </section>
+
     </div>
   );
 }

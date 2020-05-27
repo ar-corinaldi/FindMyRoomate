@@ -6,6 +6,11 @@ import TextField from '@material-ui/core/TextField';
 import FormGroup from '@material-ui/core/FormGroup';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 
 function Profile(props) {
 
@@ -27,13 +32,22 @@ function Profile(props) {
   const refCurrency = useRef();
   const refBathroom = useRef();
   const refFurnished= useRef();
+  const refPref= useRef();
+  const refPets= useRef();
+  const [value, setValue] = React.useState('Pets Allowed');
+  const [preference, setPreference] = React.useState('Any');
 
   const classes = useStyles();
   const [state, setState] = React.useState({
     furnished: '',
     name: 'hai',
-    bathroom: ''
+    bathroom: '',
+    currency: ''
   });
+
+  const handleChangeValue = (event) => {
+    setValue(event.target.value);
+  };
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -45,7 +59,7 @@ function Profile(props) {
 
   return (
     <div className="container">
-      <StepperForm></StepperForm>
+    
       <div className="container justify-content-center">
       <div className="col-lg-12 bg-light">
         <div className="container">
@@ -142,18 +156,29 @@ function Profile(props) {
                 ref={refPrice}
               />
             </div>
+
+            
             <div className="form-group col-lg-6">
-              <label className="label-input" htmlFor="currency">
-                Currency
-              </label>
-              <input
-                type="text"
-                name="currency"
-                id="currency"
-                className="form-control"
+
+            <InputLabel htmlFor="currency">Currency</InputLabel>
+        <Select
+          native
+          value={state.currency}
+          onChange={handleChange}
+          inputProps={{
+            name: 'currency',
+            id: 'currency',
+          }}
+          name="currency"
+         
                 required
                 ref={refCurrency}
-              />
+        >
+          <option aria-label="None" value="" />
+          <option value="COL">COL</option>
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+        </Select>
             </div>
           </div>
 
@@ -172,6 +197,27 @@ function Profile(props) {
               >
               </textarea>
             </div>
+          
+          <div className="row">
+          <div className="form-group col-lg-6">
+            <FormLabel component="legend">Pets</FormLabel>
+         <RadioGroup aria-label="pets" name="pets" id="pets" value={value} onChange={handleChangeValue}  ref={refPets}>
+         <FormControlLabel value="Allowed" control={<Radio />} label="Pets allowed" />
+         <FormControlLabel value="Some pets" control={<Radio />} label="Some pets allowed" />
+         <FormControlLabel value="No pets allowed" control={<Radio />} label="No pets allowed" />
+         </RadioGroup>
+         </div>
+
+         <div className="form-group col-lg-6">
+            <FormLabel component="legend">Gender Preference</FormLabel>
+         <RadioGroup  className="justify-content-center" aria-label="gender preference" name="preference" id="preference" value={preference} onChange={handleChangeValue}  ref={refPref}>
+         <FormControlLabel value="Any" control={<Radio />} label="Any gender" />
+         <FormControlLabel value="Only women" control={<Radio />} label="Only women" />
+         <FormControlLabel value="Only men" control={<Radio />} label="Only men" />
+         </RadioGroup>
+         </div>
+
+          </div>
 
               
             <div className="form-group">

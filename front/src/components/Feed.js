@@ -8,10 +8,16 @@ import Pagination from "@material-ui/lab/Pagination";
 
 function Feed(props) {
   const [feed, setFeed] = useState(undefined);
-
+  const [pages, setPages] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
   const [users, setUsers] = useState([]);
   const chatContainerRef = createRef();
+
+  useEffect(() => {
+    fetch("/pagesFeed")
+      .then(res => res.json())
+      .then(newPages => setPages(newPages));
+  },[]);
 
   useEffect(() => {
     fetching();
@@ -137,7 +143,7 @@ function Feed(props) {
     <div>
       <section>
         <h3>Current Offers</h3>
-        <SearchBar setFeed={setFeed} feed={feed} pages={props.pages} setPages={props.setPages}/>
+        <SearchBar setFeed={setFeed} feed={feed} pages={pages} setPages={setPages}/>
       </section>
 
       <div className="chatbox-container" ref={chatContainerRef}>
@@ -152,7 +158,7 @@ function Feed(props) {
           ""
         ) : (
           <Pagination
-            count={Math.ceil(props.pages / 9)}
+            count={Math.ceil(pages / 9)}
             page={pageNumber}
             defaultPage={1}
             onChange={handleChange}

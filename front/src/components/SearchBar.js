@@ -1,23 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 
 function SearchBar(props) {
   const [text, setText] = useState("");
   const textRef = useRef();
   const fetching = async (text) => {
     let newText = text.replace(" ", "-");
-    console.log(newText);
     let url = `/search/${newText}`;
     if(text==="") url = "/loadFeed";
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data);
     props.setFeed(data);
     props.setPages(data.length);
   };
 
   let change = (e) => {
     e.preventDefault();
-    console.log(textRef.current.value);
     setText(textRef.current.value);
     
     fetching(textRef.current.value);

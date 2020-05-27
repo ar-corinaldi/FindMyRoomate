@@ -7,13 +7,13 @@ const passportRoutes = require("./routes/passportRoutes");
 const configurePassport = require("./modules/Passport");
 
 const app = express();
-
+app.disable("etag");
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, "front/build")));
-app.use(express.static(path.join(__dirname, "front/public")));
+app.use(express.static(path.join(__dirname, "front/build")));
+// app.use(express.static(path.join(__dirname, "front/public")));
 
 configurePassport(app);
 

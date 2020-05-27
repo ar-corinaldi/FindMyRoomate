@@ -24,7 +24,7 @@ router.post(
   "/login",
   passport.authenticate("local", { failureRedirect: "/login" }),
   function (req, res) {
-    res.redirect("/");
+    res.redirect("/feed");
   }
 );
 
@@ -127,10 +127,9 @@ router.get("/profile/:userProfile", (req, res) => {
 
 router.get("/search/:text", (req, res) => {
   let text = req.params.text.replace("-", " ");
-  console.log("ENDPOINT: /seach/" + req.params.text);
+  console.log("ENDPOINT: /search/" + req.params.text);
   mongo.feeds.search(text).then((data) => {
-    console.log(data);
-    res.send(JSON.parse(data));
+    res.json(data);
   });
 });
 
