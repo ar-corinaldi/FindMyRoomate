@@ -8,17 +8,30 @@ import Profile from "./components/Profile";
 import Logout from "./components/Logout";
 import Chat from "./components/Chat";
 import UserProfile from "./components/UserProfile";
+import MyProfile from "./components/MyProfile";
 import Welcome from "./components/Welcome";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const [user, setUser] = useState(undefined);
   const [pages, setPages] = useState(0);
+  const setupWS = () => {
+    const url = process.env.BACKEND || "ws://localhost:8000";
+    const ws = new WebSocket(url);
+    ws.onopen = () => {
+      // console.log("Websocket client connected");
+      ws.onmessage = (msg) => {
+        // console.log("WS got message", msg);
+      }
+    };
+  };
+  
   useEffect(() => {
+    setupWS();
+
     fetch("/getUser", { credentials: "include" })
       .then((res) => res.json())
       .then((user) => setUser(user));
-    console.log(user);
 
   }, []);
 
@@ -29,7 +42,6 @@ function App() {
   },[]);
 
   const click = () => {
-    console.log("Redirect");
     fetch("/login");
   };
 
@@ -57,6 +69,7 @@ function App() {
             ) : (
               <Route path="/profile" exact component={() => <Profile user={user}/>} />
             )}
+            <Route path="/me" exact component={() => <MyProfile user={user} />} />
             <Route path="/logout" exact component={() => <Logout setUser={setUser}/>} />
 
             <Route path="/chat" exact component={() => <Chat user={user} setUser={setUser}/>} />

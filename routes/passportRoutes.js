@@ -24,7 +24,7 @@ router.post(
   "/login",
   passport.authenticate("local", { failureRedirect: "/login" }),
   function (req, res) {
-    res.redirect("/");
+    res.redirect("/feed");
   }
 );
 
@@ -80,7 +80,7 @@ router.post("/feed", upload.single("image"), async (req, res) => {
     req.body.availability = true;
     const fileName = req.user.username + "_" + req.file.originalname;
     const fileContent = req.file.buffer;
-    const data = await AWS.upload(fileName, fileContent); 
+    const data = await AWS.upload(fileName, fileContent);
     req.body.image = data.Location;
     console.log(data.Location);
     mongo.feeds.insert(req.body).finally(() => res.redirect("/"));
@@ -97,21 +97,33 @@ router.get("/pagesFeed", (req, res) => {
   mongo.feeds.getPages().then((numPages) => res.json(numPages));
 });
 
-router.get("/getUsers2", (req,res) => {
-  console.log("DANIELLA FELIZ CUMPLEAÑOS");
-  mongo.users.findAll()
-    .then((data )=> {console.log("Ussers", data); 
-      res.json(data);
-    });
+router.get("/rooms/:user", (req, res) => {
+  console.log("Entra");
+  mongo.feeds.findByUsername(req.params.user).then((data) => res.json(data));
 });
 
+router.get("/getUsers2", (req, res) => {
+  console.log("DANIELLA FELIZ CUMPLEAÑOS");
+  mongo.users.findAll().then((data) => {
+    console.log("Ussers", data);
+    res.json(data);
+  });
+});
 
-router.get("/profile/:userProfile", (req,res) => {
-  console.log("HOLA SIRVE",req.params.userProfile);
-  mongo.users.findByUsername2(req.params.userProfile)
-    .then((data )=> {console.log("UserProfile", data); 
-      res.json(data);
-    });
+router.get("/profile/:userProfile", (req, res) => {
+  console.log("HOLA SIRVE", req.params.userProfile);
+  mongo.users.findByUsername2(req.params.userProfile).then((data) => {
+    console.log("UserProfile", data);
+    let users = [];
+    console.log("THIS IS current user", req.user);
+    if (req.user) {
+      users.push(req.user);
+      users.push(data);
+      console.log("THIS IS USERS", users);
+      res.json(users);
+    }
+    else res.json(data);
+  });
 });
 
 module.exports = router;

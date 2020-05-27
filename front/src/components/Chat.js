@@ -17,7 +17,6 @@ class Chat extends Component {
         }
     }       
     componentDidMount() {
-        console.log(this.state.currentUser)
             Talk.ready
                 .then(() => {
                     const me = new Talk.User({

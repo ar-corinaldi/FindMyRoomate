@@ -1,5 +1,5 @@
 const mongodb = require("mongodb");
-//require("dotenv").config();
+// require("dotenv").config();
 const MongoClient = mongodb.MongoClient;
 function MongoUtils() {
   const mu = {};
@@ -45,6 +45,8 @@ function MongoUtils() {
         .finally(() => client.close());
     });
   };
+
+  
 
   mu.users.findByUsername = (username, cb) => {
     return mu.connect().then((client) => {
@@ -99,6 +101,14 @@ function MongoUtils() {
     });
   };
 
+  mu.feeds.findByUsername = (user) => {
+    return mu.connect().then((client) => {
+      const feeds = client.db(DB_NAME).collection("Feed");
+      let query = { user : user }
+      return feeds.find(query).toArray().finally(() => client.close());
+    });
+  }
+
   mu.feeds.insert = (query) => {
     console.log("Query for posting a feed",query);
     return mu.connect().then((client) => {
@@ -116,6 +126,23 @@ function MongoUtils() {
         return users.find(query).toArray().finally( () => client.close() );
       });
   };
+
+
+  mu.listenForChanges = () => {
+    const col = "Feed"
+    console.log("Listening to changes in the collection",col);
+    return mu.connect()
+      .then(client => {
+        const cursor = client.db(DB_NAME)
+          .collection(col)
+          .watch();
+        
+          cursor.on("change", (data) => {
+            console.log("Change in", col, data);    
+          });
+      })
+  }
+
 
   return mu;
 }
