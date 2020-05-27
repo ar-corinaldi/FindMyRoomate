@@ -97,6 +97,11 @@ router.get("/pagesFeed", (req, res) => {
   mongo.feeds.getPages().then((numPages) => res.json(numPages));
 });
 
+router.get("/rooms/:user", (req,res) => {
+  console.log("Entra");
+  mongo.feeds.findByUsername(req.params.user).then(data => res.json(data));
+});
+
 router.get("/getUsers2", (req,res) => {
   console.log("DANIELLA FELIZ CUMPLEAÑOS");
   mongo.users.findAll()

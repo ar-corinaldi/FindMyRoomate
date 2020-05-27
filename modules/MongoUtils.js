@@ -46,6 +46,8 @@ function MongoUtils() {
     });
   };
 
+  
+
   mu.users.findByUsername = (username, cb) => {
     return mu.connect().then((client) => {
       const users = client.db(DB_NAME).collection("Users");
@@ -98,6 +100,14 @@ function MongoUtils() {
         .finally(() => client.close());
     });
   };
+
+  mu.feeds.findByUsername = (user) => {
+    return mu.connect().then((client) => {
+      const feeds = client.db(DB_NAME).collection("Feed");
+      let query = { user : user }
+      return feeds.find(query).toArray().finally(() => client.close());
+    });
+  }
 
   mu.feeds.insert = (query) => {
     console.log("Query for posting a feed",query);

@@ -22,6 +22,12 @@
   justify-content: center;
 }
 
+.d-block{
+  max-width: 18rem;
+  min-width: 20rem;
+  max-height: 52rem;
+}
+
 .Navbar{
 color: white;
 background-color: white;

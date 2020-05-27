@@ -38,6 +38,15 @@ function Navbar(props) {
                 <a className="nav-item nav-link active">Login</a>
               </Link>
             )}
+            {props.user ? (
+              <Link to="/me">
+                <a className="nav-item nav-link active">Profile</a>
+              </Link>
+            ) : (
+              <Link to="/login">
+                <a className="nav-item nav-link active">Login</a>
+              </Link>
+            )}
             {props.user? <Link to="/logout"><a className="nav-item nav-link active">Logout</a></Link>
             : ""}
           </div>
