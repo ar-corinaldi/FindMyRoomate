@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, createRef } from "react";
 import Talk from 'talkjs';
 import SearchBar from "./SearchBar";
 import location from "./placeholder.png";
@@ -11,6 +11,7 @@ import Pagination from "@material-ui/lab/Pagination";
   
   const [pageNumber, setPageNumber] = useState(1);
   const [users, setUsers] = useState([]);
+  const  chatContainerRef= createRef();
 
   useEffect(() => {
     fetching();
@@ -55,7 +56,7 @@ import Pagination from "@material-ui/lab/Pagination";
           name: props.user.username,
           email: props.user.email,
           photoUrl: "https://talkjs.com/docs/img/george.jpg",
-          welcomeMessage: " Hi, im interested"
+          welcomeMessage: ""
       });
 
         const other = new Talk.User({         
@@ -63,30 +64,29 @@ import Pagination from "@material-ui/lab/Pagination";
           name: user.username,
           email: user.email,
           photoUrl: "https://talkjs.com/docs/img/george.jpg",
-          welcomeMessage: " Hi"
-      })
+          welcomeMessage: ""
+      });
 
-      console.log(other);
         /* Create a talk session if this does not exist. Remember to replace tthe APP ID with the one on your dashboard */
-        if (!window.talkSession) {
+       
             window.talkSession = new Talk.Session({
                 appId: process.env.REACT_APP_API_KEY,
                 me: me
             });
-        } 
-        
+       
+  
         /* Get a conversation ID or create one */
         const conversationId = Talk.oneOnOneId(me, other);
         const conversation = window.talkSession.getOrCreateConversation(conversationId);
-        
+       
         /* Set participants of the conversations */
         conversation.setParticipant(me);
         conversation.setParticipant(other);
+       
+        const chatbox = window.talkSession.createChatbox(conversation);
+        chatbox.mount(chatContainerRef.current);
+        
 
-        this.chatbox = window.talkSession.createChatbox(conversation);
-        this.chatbox.mount(this.container);
-        console.log(this);
-        console.log(this.container);
         
         
     })            
@@ -107,8 +107,8 @@ import Pagination from "@material-ui/lab/Pagination";
         />
         <div className="card-body">
           <h5 className="card-title"><img src={location} width="30" height="30"/>{element.address}</h5>
-          <h6 className="card-text">Furnished:</h6> <p>Complete</p>
-          <h6 className="card-text">Bathroom:</h6> <p>Private</p>
+          <h6 className="card-text">Furnished:</h6> <p>{element.furnished}</p>
+          <h6 className="card-text">Bathroom:</h6> <p>{element.bathroom}</p>
          
         </div>
         <ul className="list-group list-group-flush">
@@ -140,6 +140,9 @@ import Pagination from "@material-ui/lab/Pagination";
         <h3>Current Offers</h3>
         <SearchBar></SearchBar>
       </section>
+      <div className="chatbox-container" ref={chatContainerRef}>
+            <div id="talkjs-container" style={{height: "300px"}}><i></i></div>
+         </div>
       <div id="thisCards">{renderFeed()}</div>
       <div id="pagination">
         {!feed ? (
@@ -155,9 +158,7 @@ import Pagination from "@material-ui/lab/Pagination";
           />
         )}
       </div>
-      <div className="chatbox-container" >
-            <div id="talkjs-container" style={{height: "300px"}}><i></i></div>
-         </div>
+   
       </div>
     
   );

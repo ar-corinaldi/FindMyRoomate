@@ -2,7 +2,7 @@ const passport = require("passport");
 const Strategy = require("passport-local").Strategy;
 const mongo = require("./MongoUtils");
 const crypto = require("crypto");
-require("dotenv").config();
+//require("dotenv").config();
 
 passport.use(
   new Strategy((username, password, cb) => {

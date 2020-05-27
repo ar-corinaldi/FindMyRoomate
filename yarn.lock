@@ -2360,6 +2360,11 @@ table@^5.2.3:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
+talkjs@^0.14.2:
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/talkjs/-/talkjs-0.14.2.tgz#b652fbcd6a9b54a00a9789bea937eebac6a9e7f8"
+  integrity sha512-Aa+UxbEw3f0cpFfiC9EoP5iaxMW2cyeRBRlo85tmp29ZvOXpTrjRKroG3DVq1taIcvzFQOUEos+6Bg2e9Qnc1w==
+
 term-size@^2.1.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/term-size/-/term-size-2.2.0.tgz#1f16adedfe9bdc18800e1776821734086fcc6753"
