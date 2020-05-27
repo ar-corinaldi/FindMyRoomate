@@ -1,14 +1,64 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./UserProfile.css";
+import Talk from "talkjs";
 
 function UserProfile({ match }) {
-  const [profile, setProfile] = useState({});
-  const elprofile = match.params.userProfile;
+  const [profile, setProfile] = useState([]);
+  const chatContainerRef = useRef();
+  const handleClick = () => {
+    /* Session initialization code */
+    Talk.ready
+      .then(() => {
+        /* Create the two users that will participate in the conversation */
+        const me = new Talk.User({
+          id: profile[0]._id,
+          name: profile[0].username,
+          email: profile[0].email,
+          photoUrl: "https://talkjs.com/docs/img/george.jpg",
+          welcomeMessage: "Hello, I am interested in your room!",
+        });
+
+        const other = new Talk.User({
+          id: profile[1]._id,
+          name: profile[1].username,
+          email: profile[1].email,
+          photoUrl: "https://talkjs.com/docs/img/george.jpg",
+          welcomeMessage: "Hi",
+        });
+
+        /* Create a talk session if this does not exist. Remember to replace tthe APP ID with the one on your dashboard */
+
+        window.talkSession = new Talk.Session({
+          appId: process.env.REACT_APP_API_KEY||"tknEJI1i",
+          me: me,
+        });
+
+        /* Get a conversation ID or create one */
+        const conversationId = Talk.oneOnOneId(me, other);
+        const conversation = window.talkSession.getOrCreateConversation(
+          conversationId
+        );
+
+        /* Set participants of the conversations */
+        conversation.setParticipant(me);
+        conversation.setParticipant(other);
+
+        const chatbox = window.talkSession.createChatbox(conversation);
+        chatbox.mount(chatContainerRef.current);
+
+        this.chatbox = window.talkSession.createChatbox(conversation);
+        this.chatbox.mount(this.container);
+      })
+      .catch((e) => console.error(e));
+  };
 
   useEffect(() => {
     fetch(`/profile/${match.params.userProfile}`)
       .then((res) => res.json())
-      .then((newprofile) => setProfile(newprofile));
+      .then((newprofile) => {
+        console.log(newprofile);
+        setProfile(newprofile)
+      });
   }, []);
 
   return (
@@ -19,24 +69,26 @@ function UserProfile({ match }) {
             <img src="profile.jpg" />
           </div>
         </div>
-
-        <div class="lower-container">
-          <div>
-            <h3>{profile.username}</h3>
-            <h4>{profile.occupation}</h4>
+        {profile.length === 0 ? (
+          ""
+        ) : (
+          <div class="lower-container">
+            <div>
+              <h3>{profile[1].username}</h3>
+              <h4>{profile[1].occupation}</h4>
+            </div>
+            <div>
+              <p>Age:{profile[1].age}</p>
+              <p>Genre: {profile[1].genre}</p>
+              <p>{profile[1].description}</p>
+            </div>
+            <div>
+              <button onClick={handleClick}>Contact me</button>
+            </div>
           </div>
-          <div>
-            <p>Age:{profile.age}</p>
-            <p>Genre: {profile.genre}</p>
-            <p>{profile.description}</p>
-          </div>
-          <div>
-            <a href="#" class="btn">
-              Contact me
-            </a>
-          </div>
-        </div>
+        )}
       </div>
+      <div className="chatbox-container" ref={chatContainerRef}></div>
     </div>
   );
 }
