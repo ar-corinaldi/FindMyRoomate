@@ -4,8 +4,6 @@ const AWS = require("aws-sdk");
 function AWSUtils() {
   const mu = {};
 
-  mu.verifyCredentials = () => {
-
   s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 
   mu.upload = (fileName, fileContent) => {
