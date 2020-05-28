@@ -13,14 +13,10 @@ function MyProfile(props) {
   };
   const setupWS = () => {
     const host = window.location.origin.replace(/^http/, "ws");
-    // const ws = new WebSocket(host);
-    console.log(host);
-    const url = process.env.BACKEND || "ws://localhost:8000";
     const ws = new WebSocket(host);
     ws.onopen = () => {
       console.log("Websocket client connected");
       ws.onmessage = (msg) => {
-        // console.log("WS got message", msg.data);
         setRooms(JSON.parse(msg.data));
       };
     };
