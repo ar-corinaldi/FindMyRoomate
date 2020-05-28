@@ -6,7 +6,7 @@ function Navbar(props) {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light fixed-top">
         <a className="navbar-brand" href="/">
-          <img src={room} width="35" height="35" /> Room8
+          <img src={room} width="35" height="35" alt="find my roommate logo" /> Room8
         </a>
         <button
           className="navbar-toggler"

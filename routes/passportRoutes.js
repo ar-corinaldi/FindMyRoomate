@@ -84,7 +84,7 @@ router.post("/register", (req, res) => {
       phone: phone,
       occupation: occupation,
       age: age,
-      gender: gender,
+      gender: gender
     };
     mongo.users.insert(newUser).finally(() => {
       res.redirect(307, "/login");

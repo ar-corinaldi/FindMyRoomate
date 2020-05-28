@@ -12,7 +12,7 @@ return(
 
     <section className="container">
         <h1>Room8</h1>
-        <h5>Here you can look for your new roommate or be found!</h5>
+        <h2>Here you can look for your new roommate or be found!</h2>
 
         <div className="container">
             
