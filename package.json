@@ -7,7 +7,7 @@
     "heroku-postbuild": "cd front && yarn install && yarn run build"
   },
   "dependencies": {
-    "aws-sdk": "^2.683.0",
+    "aws-sdk": "^2.685.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",

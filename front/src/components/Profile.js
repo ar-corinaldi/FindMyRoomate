@@ -49,6 +49,10 @@ function Profile(props) {
     setValue(event.target.value);
   };
 
+  const handleChangeValuePref = (event) => {
+    setPreference(event.target.value);
+  };
+
   const handleChange = (event) => {
     const name = event.target.name;
     setState({
@@ -210,7 +214,7 @@ function Profile(props) {
 
          <div className="form-group col-lg-6">
             <FormLabel component="legend">Gender Preference</FormLabel>
-         <RadioGroup  className="justify-content-center" aria-label="gender preference" name="preference" id="preference" value={preference} onChange={handleChangeValue}  ref={refPref}>
+         <RadioGroup  className="justify-content-center" aria-label="gender preference" name="preference" id="preference" value={preference} onChange={handleChangeValuePref}  ref={refPref}>
          <FormControlLabel value="Any" control={<Radio />} label="Any gender" />
          <FormControlLabel value="Only women" control={<Radio />} label="Only women" />
          <FormControlLabel value="Only men" control={<Radio />} label="Only men" />
