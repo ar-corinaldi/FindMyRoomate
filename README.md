@@ -61,9 +61,9 @@ yarn start
 ```
 Server runs on http://localhost:3000
 
-In order to run the sockets correctly, change on the file ./front/src/components/MyProfile.js window.location.origin.replace(/^http/, "ws"); for:
+In order to run the sockets correctly, change the variable host of the file ./front/src/components/MyProfile.js for:
 ```bash
-"ws://localhost:8000/";
+"ws://localhost:8000/"
 ```
 
 <h2>IMPORTANT!</h2>
