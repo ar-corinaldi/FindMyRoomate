@@ -90,7 +90,7 @@ body {
           background: url(./assets/bathtub.svg);
           background-size: auto 100%;
           background-repeat: no-repeat; }
-        .card-profile .features li.icon-car {
+        .card-profile .features li.icon-pet {
           background: url(./assets/location.svg);
           background-size: auto 100%;
           background-repeat: no-repeat; }
@@ -115,3 +115,17 @@ body {
       position: absolute;
       top: 0;
       left: 0; }
+
+
+      .slider-button-left:before, .slider-button-right:before {
+        background: url(./assets/play-button.svg);
+      }
+      
+      .slider-button-left:before {
+        content:'\E759';
+        float: left;
+      }
+      .slider-button-right:before {
+        content:'\E75A';
+        float: right;
+      }

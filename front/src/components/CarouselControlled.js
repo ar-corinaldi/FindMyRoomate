@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import "./Carousel.css";
+import next from "./assets/play-button.svg";
+import previous from "./assets/previous.svg";
 
 function CarouselControlled(props) {
   const [index, setIndex] = useState(0);
+  const nextIcon= useState(<img src={next} width="30" height="30" alt="next button"/>);
+  const prevIcon= useState(<img src={previous} width="30" height="30" alt="next button"/>);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
@@ -21,7 +25,7 @@ function CarouselControlled(props) {
         <h1>Publications</h1>
         <h6>Here you can see the rooms you have published!</h6>
       </section>
-    <Carousel activeIndex={index} onSelect={handleSelect} className="w-100">
+    <Carousel nextIcon ={nextIcon} prevIcon={prevIcon} activeIndex={index} onSelect={handleSelect} className="w-100">
     {!props.rooms
       ? <h1>"No rooms published yet"</h1>
       : props.rooms.map((room, index) => {
@@ -39,7 +43,7 @@ function CarouselControlled(props) {
                 <ul className="features">
                     <li className="icon-bed">{room.furnished} <span><p>Furniture</p></span></li>
                     <li className="icon-bath">{room.bathroom} <span>Bathrooms</span></li>
-                    <li className="icon-car">{room.pets} <span>Pets</span></li>
+                    <li className="icon-pet">{room.pets} <span>Pets</span></li>
                 </ul>
             </div>
         </div>
