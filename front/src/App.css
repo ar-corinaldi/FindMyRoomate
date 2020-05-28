@@ -13,6 +13,9 @@ li.dd-list-item{
   list-style-type: none;
 }
 
+#please{
+  margin-top: 40%;
+}
 
 #theseCards .card {
   max-width: 18rem;
@@ -32,7 +35,9 @@ li.dd-list-item{
   min-width: 20rem;
   max-height: 52rem;
 }
-
+.navbar{
+  background-color: white;
+}
 .Navbar{
 color: white;
 background-color: white;

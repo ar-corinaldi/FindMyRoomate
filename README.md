@@ -40,6 +40,7 @@ To run backend:
 ```bash
 cd FindMyRoomate
 cd public
+npm install yarn
 yarn install
 yarn start
 ```
@@ -54,10 +55,16 @@ To run frontend:
 ```bash
 cd FindMyRoomate
 cd front
+npm install yarn
 yarn install
 yarn start
 ```
 Server runs on http://localhost:3000
+
+In order to run the sockets correctly, change the variable host of the file ./front/src/components/MyProfile.js for:
+```bash
+"ws://localhost:8000/"
+```
 
 <h2>IMPORTANT!</h2>
 
