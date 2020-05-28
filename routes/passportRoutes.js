@@ -124,7 +124,6 @@ router.post("/feed", upload.single("image"), async (req, res) => {
 
 router.get("/pageFeed/:pageNumber", (req, res) => {
   console.log(req.params);
-  console.log(req.param);
   mongo.feeds.findAll(req.params.pageNumber, 9).then((data) => res.json(data));
 });
 

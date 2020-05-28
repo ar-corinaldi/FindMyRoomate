@@ -6,23 +6,34 @@ import useAutocomplete from "@material-ui/lab/useAutocomplete";
 function SearchBar(props) {
   const [text, setText] = useState("");
   const [input, setInput] = useState("");
+  const [searched, setSearched] = useState("");
   const textRef = useRef();
   const fetching = async (text) => {
     let newText = text.replace(" ", "-");
     let url = `/search/${newText}`;
-    if (text === "") url = "/loadFeed";
-    const res = await fetch(url);
-    const data = await res.json();
-    props.setFeed(data);
-    props.setPages(data.length);
+    if (text === "") {
+      url = "/loadFeed";
+      const res1 = await fetch(url);
+      const data = await res1.json();
+      const res2 = await fetch("/pagesFeed");
+      const lenPages = await res2.json();
+      props.setFeed(data);
+      props.setPages(lenPages);
+    } else {
+      const res1 = await fetch(url);
+      const data = await res1.json();
+      props.setFeed(data);
+      props.setPages(data.length);
+    }
   };
 
   let change = (e) => {
     e.preventDefault();
-
+    setSearched(input);
     fetching(input);
   };
   const options = [
+    "",
     "COL",
     "USD",
     "EUR",
@@ -51,7 +62,7 @@ function SearchBar(props) {
             setInput(newInputValue);
           }}
           renderInput={(params) => (
-            <TextField {...params} label="Combo box" variant="outlined" />
+            <TextField {...params} label="..." variant="outlined" />
           )}
         />
         <button
@@ -62,7 +73,7 @@ function SearchBar(props) {
         </button>
 
         <div className="ml-3">
-          {input === "" ? "" : `Last search '${input}'`}
+          {searched === "" ? "" : `Last search '${searched}'`}
         </div>
       </form>
     </div>

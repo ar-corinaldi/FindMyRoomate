@@ -108,12 +108,15 @@ function Feed(props) {
               {element.address}
             </h5>
             <div className="row col-lg-12">
-            <h6 className="card-text col-lg-6">Furnished:</h6> <p className="card-text col-lg-6">{element.furnished}</p>
-            <h6 className="card-text col-lg-6">Bathroom:</h6> <p className="card-text col-lg-6">{element.bathroom}</p>
-            <h6 className="card-text col-lg-6">Gender Preference:</h6> <p className="card-text col-lg-6">{element.preference}</p>
-            <h6 className="card-text col-lg-6">Pets:</h6> <p className="card-text col-lg-6">{element.pets}</p>
-            
-          </div>
+              <h6 className="card-text col-lg-6">Furnished:</h6>{" "}
+              <p className="card-text col-lg-6">{element.furnished}</p>
+              <h6 className="card-text col-lg-6">Bathroom:</h6>{" "}
+              <p className="card-text col-lg-6">{element.bathroom}</p>
+              <h6 className="card-text col-lg-6">Gender Preference:</h6>{" "}
+              <p className="card-text col-lg-6">{element.preference}</p>
+              <h6 className="card-text col-lg-6">Pets:</h6>{" "}
+              <p className="card-text col-lg-6">{element.pets}</p>
+            </div>
           </div>
           <ul className="list-group list-group-flush">
             <li className="list-group-item">
@@ -133,14 +136,14 @@ function Feed(props) {
             </Link>
 
             <h5>{element.availability ? "Available" : "No Available"}</h5>
-           
+
             <Link to={`/user/${element.user}`}>
-            <button
-              className="button"
-              onClick={() => handleClick(element.user)}
-            >
-              <img src={message} width="30" height="30" />
-            </button>
+              <button
+                className="button"
+                onClick={() => handleClick(element.user)}
+              >
+                <img src={message} width="30" height="30" />
+              </button>
             </Link>
           </div>
         </div>
