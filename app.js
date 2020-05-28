@@ -7,7 +7,7 @@ const passportRoutes = require("./routes/passportRoutes");
 const configurePassport = require("./modules/Passport");
 
 const app = express();
-
+app.disable("etag");
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

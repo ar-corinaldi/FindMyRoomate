@@ -40,13 +40,9 @@ function MongoUtils() {
     return mu.connect().then((client) => {
       const users = client.db(DB_NAME).collection("Users");
       const query = { username };
-      return users
-        .findOne(query)
-        .finally(() => client.close());
+      return users.findOne(query).finally(() => client.close());
     });
   };
-
-  
 
   mu.users.findByUsername = (username, cb) => {
     return mu.connect().then((client) => {
@@ -77,24 +73,22 @@ function MongoUtils() {
   mu.feeds = {};
 
   mu.feeds.getPages = () => {
-    return mu.connect()
-      .then(client => { 
-        const feeds = client.db(DB_NAME).collection("Feed");
-        return feeds.estimatedDocumentCount()
-          .finally(() => client.close());
-      });
+    return mu.connect().then((client) => {
+      const feeds = client.db(DB_NAME).collection("Feed");
+      return feeds.estimatedDocumentCount().finally(() => client.close());
+    });
   };
 
   mu.feeds.findAll = (pageNumber, nPerPage) => {
-    if(!pageNumber) pageNumber=1;
-    if(!nPerPage) nPerPage = 9;
+    if (!pageNumber) pageNumber = 1;
+    if (!nPerPage) nPerPage = 9;
     return mu.connect().then((client) => {
       const feeds = client.db(DB_NAME).collection("Feed");
       const query = {};
 
       return feeds
         .find(query)
-        .skip( pageNumber > 0 ? ( ( pageNumber - 1 ) * nPerPage ) : 0 )
+        .skip(pageNumber > 0 ? (pageNumber - 1) * nPerPage : 0)
         .limit(nPerPage)
         .toArray()
         .finally(() => client.close());
@@ -104,13 +98,16 @@ function MongoUtils() {
   mu.feeds.findByUsername = (user) => {
     return mu.connect().then((client) => {
       const feeds = client.db(DB_NAME).collection("Feed");
-      let query = { user : user }
-      return feeds.find(query).toArray().finally(() => client.close());
+      let query = { user: user };
+      return feeds
+        .find(query)
+        .toArray()
+        .finally(() => client.close());
     });
-  }
+  };
 
   mu.feeds.insert = (query) => {
-    console.log("Query for posting a feed",query);
+    console.log("Query for posting a feed", query);
     return mu.connect().then((client) => {
       const feeds = client.db(DB_NAME).collection("Feed");
       console.log("THIS IS INSERT FEED", query);
@@ -119,30 +116,38 @@ function MongoUtils() {
   };
 
   mu.users.findAll = () => {
-    return mu.connect()
-      .then(client => {
-        const users = client.db(DB_NAME).collection("Users");
-        const query = {};
-        return users.find(query).toArray().finally( () => client.close() );
-      });
+    return mu.connect().then((client) => {
+      const users = client.db(DB_NAME).collection("Users");
+      const query = {};
+      return users
+        .find(query)
+        .toArray()
+        .finally(() => client.close());
+    });
   };
 
+  mu.feeds.search = (text) => {
+    return mu.connect().then((client) => {
+      const feed = client.db(DB_NAME).collection("Feed");
+      const query = { $text: { $search: text } };
+      return feed
+        .find(query)
+        .toArray()
+        .finally(() => client.close());
+    });
+  };
 
   mu.listenForChanges = () => {
-    const col = "Feed"
-    console.log("Listening to changes in the collection",col);
-    return mu.connect()
-      .then(client => {
-        const cursor = client.db(DB_NAME)
-          .collection(col)
-          .watch();
-        
-          cursor.on("change", (data) => {
-            console.log("Change in", col, data);    
-          });
-      })
-  }
+    const col = "Feed";
+    console.log("Listening to changes in the collection", col);
+    return mu.connect().then((client) => {
+      const cursor = client.db(DB_NAME).collection(col).watch();
 
+      cursor.on("change", (data) => {
+        console.log("Change in", col, data);
+      });
+    });
+  };
 
   return mu;
 }

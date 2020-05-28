@@ -24,7 +24,7 @@ router.post(
   "/login",
   passport.authenticate("local", { failureRedirect: "/login" }),
   function (req, res) {
-    res.redirect("/feed");
+    res.redirect("/");
   }
 );
 
@@ -121,8 +121,15 @@ router.get("/profile/:userProfile", (req, res) => {
       users.push(data);
       console.log("THIS IS USERS", users);
       res.json(users);
-    }
-    else res.json(data);
+    } else res.json(data);
+  });
+});
+
+router.get("/search/:text", (req, res) => {
+  let text = req.params.text.replace("-", " ");
+  console.log("ENDPOINT: /search/" + req.params.text);
+  mongo.feeds.search(text).then((data) => {
+    res.json(data);
   });
 });
 

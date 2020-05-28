@@ -14,7 +14,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const [user, setUser] = useState(undefined);
-  const [pages, setPages] = useState(0);
   const setupWS = () => {
     const url = process.env.BACKEND || "ws://localhost:8000";
     const ws = new WebSocket(url);
@@ -35,11 +34,6 @@ function App() {
 
   }, []);
 
-  useEffect(() => {
-    fetch("/pagesFeed")
-      .then(res => res.json())
-      .then(newPages => setPages(newPages));
-  },[]);
 
   const click = () => {
     fetch("/login");
@@ -56,7 +50,7 @@ function App() {
             {!user ? (
               <Route path="/login" exact component={() => <Login />} />
             ) : (
-              <Route path="/feed" exact component={() => <Feed user={user} setUser={setUser} pages={pages} setPages={setPages}/>} />
+              <Route path="/feed" exact component={() => <Feed user={user} setUser={setUser} />} />
             )}
             <Route
               path="/login"
