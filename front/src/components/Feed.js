@@ -107,8 +107,12 @@ function Feed(props) {
               <img src={location} width="30" height="30" />
               {element.address}
             </h5>
-            <h6 className="card-text">Furnished:</h6> <p>{element.furnished}</p>
-            <h6 className="card-text">Bathroom:</h6> <p>{element.bathroom}</p>
+            <div className="row col-lg-12">
+            <h6 className="card-text col-lg-6">Furnished:</h6> <p className="card-text col-lg-6">{element.furnished}</p>
+            <h6 className="card-text col-lg-6">Bathroom:</h6> <p className="card-text col-lg-6">{element.bathroom}</p>
+            <h6 className="card-text col-lg-6">Gender Preference:</h6> <p className="card-text col-lg-6">{element.preference}</p>
+            <h6 className="card-text col-lg-6">Pets:</h6> <p className="card-text col-lg-6">{element.pets}</p>
+          </div>
           </div>
           <ul className="list-group list-group-flush">
             <li className="list-group-item">
@@ -128,12 +132,15 @@ function Feed(props) {
             </Link>
 
             <h5>{element.availability ? "Available" : "No Available"}</h5>
+           
+            <Link to={`/user/${element.user}`}>
             <button
               className="button"
               onClick={() => handleClick(element.user)}
             >
               <img src={message} width="30" height="30" />
             </button>
+            </Link>
           </div>
         </div>
       ));
@@ -146,11 +153,6 @@ function Feed(props) {
         <SearchBar setFeed={setFeed} feed={feed} pages={pages} setPages={setPages}/>
       </section>
 
-      <div className="chatbox-container" ref={chatContainerRef}>
-        <div id="talkjs-container" style={{ height: "300px" }}>
-          <i></i>
-        </div>
-      </div>
       <div id="thisCards">{renderFeed()}</div>
 
       <div id="pagination">
