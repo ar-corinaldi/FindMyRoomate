@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
+import "./Carousel.css";
 
 function CarouselControlled(props) {
   const [index, setIndex] = useState(0);
@@ -14,27 +15,46 @@ function CarouselControlled(props) {
   };
 
   return (
+
+    <div className="container">
+      <section>
+        <h1>Publications</h1>
+        <h6>Here you can see the rooms you have published!</h6>
+      </section>
     <Carousel activeIndex={index} onSelect={handleSelect} className="w-100">
-      {!props.rooms ? (
-        <h1>"No rooms yet"</h1>
-      ) : (
-        props.rooms.map((room, index) => {
+    {!props.rooms
+      ? <h1>"No rooms published yet"</h1>
+      : props.rooms.map((room, index) => {
           return (
             <Carousel.Item key={index}>
-              <img src={room.image} alt="First slide" />
-              <Carousel.Caption>
-                <h3>{props.address}</h3>
-                <p>{props.price}</p>
-              </Carousel.Caption>
-
-              <button className="btn mt-4" onClick={() => fetchAvaila(room)}>
+               
+               <div id={`card-${index}`} className="card-profile">
+               <img src={room.image} alt="room pictures" />
+               <div className="details">
+                <span className="index">{index+1}</span>
+                <p className="location">
+                 
+                    {room.address}
+                </p>
+                <ul className="features">
+                    <li className="icon-bed">{room.furnished} <span><p>Furniture</p></span></li>
+                    <li className="icon-bath">{room.bathroom} <span>Bathrooms</span></li>
+                    <li className="icon-car">{room.pets} <span>Pets</span></li>
+                </ul>
+            </div>
+        </div>
+        <button className="btn mt-4" onClick={() => fetchAvaila(room)}>
                 {room.availability ? "Available" : "No Available"}
               </button>
+
             </Carousel.Item>
           );
-        })
-      )}
-    </Carousel>
+        })}
+  </Carousel>
+
+ 
+  </div>
+
   );
 }
 

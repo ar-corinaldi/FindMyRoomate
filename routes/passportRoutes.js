@@ -65,14 +65,21 @@ router.post("/register", (req, res) => {
       hash = saltHash.hash,
       correo = req.body.emailRegister,
       name = req.body.nameRegister,
-      phone = req.body.phoneRegister;
+      phone = req.body.phoneRegister,
+      occupation = req.body.occupation,
+      age = req.body.age,
+      gender= req.body.gender;
+
     const newUser = {
       username: req.body.username,
       hash: hash,
       salt: salt,
       email: correo,
       name: name,
-      phone,
+      phone:phone,
+      occupation:occupation,
+      age:age,
+      gender:gender
     };
     mongo.users.insert(newUser).finally(() => {
       res.redirect(307, "/login");
@@ -99,8 +106,9 @@ router.post("/feed", upload.single("image"), async (req, res) => {
   if (req.user) {
     req.body.user = req.user.username;
     req.body.availability = true;
-    const fileName = req.user.username + "_" + req.file.originalname;
+    const fileName = req.user.username + "_" + req.file.originalname.replace(" ","_");
     const fileContent = req.file.buffer;
+    console.log("filename",fileName);
     const data = await AWS.upload(fileName, fileContent);
     req.body.image = data.Location;
     console.log(data.Location);
