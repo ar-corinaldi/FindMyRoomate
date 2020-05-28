@@ -24,11 +24,6 @@ function App() {
 
   }, []);
 
-
-  const click = () => {
-    fetch("/login");
-  };
-
   return (
     <Router>
       <div className="App">
