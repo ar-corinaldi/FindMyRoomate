@@ -66,7 +66,9 @@ function SearchBar(props) {
           )}
         />
         <button
-          class="btn btn-elegant btn-rounded btn-sm my-0"
+          aria-label="search button"
+          role="button"
+          className="btn btn-elegant btn-rounded btn-sm my-0"
           onClick={change}
         >
           Search

@@ -15,7 +15,12 @@ body {
   .nav {
     padding: 30px 0;
     background-color: #222; }
-  
+  h1{
+    font-size: x-large;
+  }
+  h2{
+    font-size:large;
+  }
   .nav a {
     display: inline-block;
     width: 100px;
@@ -82,18 +87,7 @@ body {
         display: inline-block; }
         .card-profile .features li span {
           display: none; }
-        .card-profile .features li.icon-bed {
-          background: url(./assets/bed-left-side.svg) left center;
-          background-size: auto 100%;
-          background-repeat: no-repeat; }
-        .card-profile .features li.icon-bath {
-          background: url(./assets/bathtub.svg);
-          background-size: auto 100%;
-          background-repeat: no-repeat; }
-        .card-profile .features li.icon-pet {
-          background: url(./assets/location.svg);
-          background-size: auto 100%;
-          background-repeat: no-repeat; }
+
   
   /* #endregion */
   /* #region cards slider */

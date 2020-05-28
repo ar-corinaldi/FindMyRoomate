@@ -46,7 +46,7 @@ const configurePassport = (app) => {
       secret: process.env.SECRET || "yUQz+:ZS-5pK=,7bcR!%r&P)UW[Xv=",
       resave: false,
       saveUninitialized: false,
-      // cookie: { expires: new Date(Date.now() + 900000) },
+      //cookie: { expires: new Date(Date.now() + 900000) },
     })
   );
 

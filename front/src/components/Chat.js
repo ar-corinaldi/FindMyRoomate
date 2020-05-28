@@ -47,6 +47,9 @@ class Chat extends Component {
     render() {
         return (
             <div className="container">
+                <section>
+                    <h1>Messages</h1>
+                </section>
             <React.Fragment>
             <div style={{height: '500px'}} className="inbox-container" ref={c => this.container = c}>Loading...</div>
         </React.Fragment>

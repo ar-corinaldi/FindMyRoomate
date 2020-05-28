@@ -103,47 +103,44 @@ function Feed(props) {
             alt="Card image cap"
           />
           <div className="card-body">
-            <h5 className="card-title">
-              <img src={location} width="30" height="30" />
+            <h2 className="card-title">
+              <img src={location} width="30" height="30" alt="location image" />
               {element.address}
-            </h5>
+            </h2>
             <div className="row col-lg-12">
-              <h6 className="card-text col-lg-6">Furnished:</h6>{" "}
-              <p className="card-text col-lg-6">{element.furnished}</p>
-              <h6 className="card-text col-lg-6">Bathroom:</h6>{" "}
-              <p className="card-text col-lg-6">{element.bathroom}</p>
-              <h6 className="card-text col-lg-6">Gender Preference:</h6>{" "}
-              <p className="card-text col-lg-6">{element.preference}</p>
-              <h6 className="card-text col-lg-6">Pets:</h6>{" "}
-              <p className="card-text col-lg-6">{element.pets}</p>
-            </div>
+            <h3 className="card-text col-lg-6" aria-label="Furnished">Furnished:</h3> <p className="card-text col-lg-6">{element.furnished}</p>
+            <h3 className="card-text col-lg-6">Bathroom:</h3> <p className="card-text col-lg-6">{element.bathroom}</p>
+            <h3 className="card-text col-lg-6">Gender Preference:</h3> <p className="card-text col-lg-6">{element.preference}</p>
+            <h3 className="card-text col-lg-6">Pets:</h3> <p className="card-text col-lg-6">{element.pets}</p>
+            
+          </div>
           </div>
           <ul className="list-group list-group-flush">
             <li className="list-group-item">
-              <h6>Price</h6>
+              <h3>Price</h3>
               <p>
                 ${element.price}
                 {element.currency}
               </p>
             </li>
             <li className="list-group-item">
-              <h6>{element.city}</h6>
+              <h3>{element.city}</h3>
             </li>
           </ul>
           <div className="card-body">
-            <Link to={`/user/${element.user}`}>
-              <a className="card-link">{element.user}</a>
-            </Link>
+           
+             <h3>{element.user}</h3>
+           
 
-            <h5>{element.availability ? "Available" : "No Available"}</h5>
-
+            <h4>{element.availability ? "Available" : "No Available"}</h4>
+           
             <Link to={`/user/${element.user}`}>
-              <button
-                className="button"
-                onClick={() => handleClick(element.user)}
-              >
-                <img src={message} width="30" height="30" />
-              </button>
+            <button
+              className="button"
+              onClick={() => handleClick(element.user)}
+            >
+              <img src={message} width="30" height="30" alt="enviar mensaje"/>
+            </button>
             </Link>
           </div>
         </div>
@@ -153,15 +150,15 @@ function Feed(props) {
   return (
     <div>
       <section>
-        <h3>Current Offers</h3>
-        <SearchBar
+        <h1>Current Offers</h1>  
+      </section>
+
+      <SearchBar
           setFeed={setFeed}
           feed={feed}
           pages={pages}
           setPages={setPages}
         />
-      </section>
-
       <div id="thisCards">{renderFeed()}</div>
 
       <div id="pagination">

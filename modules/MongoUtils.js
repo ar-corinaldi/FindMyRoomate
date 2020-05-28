@@ -129,6 +129,7 @@ function MongoUtils() {
 
       return feeds
         .find(query)
+        .sort({_id: -1})
         .skip(pageNumber > 0 ? (pageNumber - 1) * nPerPage : 0)
         .limit(nPerPage)
         .toArray()

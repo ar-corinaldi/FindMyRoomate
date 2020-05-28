@@ -25,7 +25,7 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
+      <div className="App" role="main">
         <Navbar user={user} setUser={setUser} />
         <div className="container">
           
