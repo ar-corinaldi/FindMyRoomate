@@ -40,8 +40,13 @@ router.get("/rooms/delete/:roomId", (req, res) => {
 router.get("/rooms/update/:roomId/:availability", (req, res) => {
   console.log(req.params);
   let param = true;
-  if(req.params.availability===false || req.params.availability==="false") param = true;
-  else if(req.params.availability===true || req.params.availability === "true") param = false;
+  if (req.params.availability === false || req.params.availability === "false")
+    param = true;
+  else if (
+    req.params.availability === true ||
+    req.params.availability === "true"
+  )
+    param = false;
   console.log("Antes", param);
   console.log("Despues", param);
   mongo.feeds
@@ -68,7 +73,7 @@ router.post("/register", (req, res) => {
       phone = req.body.phoneRegister,
       occupation = req.body.occupation,
       age = req.body.age,
-      gender= req.body.gender;
+      gender = req.body.gender;
 
     const newUser = {
       username: req.body.username,
@@ -76,10 +81,10 @@ router.post("/register", (req, res) => {
       salt: salt,
       email: correo,
       name: name,
-      phone:phone,
-      occupation:occupation,
-      age:age,
-      gender:gender
+      phone: phone,
+      occupation: occupation,
+      age: age,
+      gender: gender,
     };
     mongo.users.insert(newUser).finally(() => {
       res.redirect(307, "/login");
@@ -106,9 +111,10 @@ router.post("/feed", upload.single("image"), async (req, res) => {
   if (req.user) {
     req.body.user = req.user.username;
     req.body.availability = true;
-    const fileName = req.user.username + "_" + req.file.originalname.replace(" ","_");
+    const fileName =
+      req.user.username + "_" + req.file.originalname.replace(" ", "_");
     const fileContent = req.file.buffer;
-    console.log("filename",fileName);
+    console.log("filename", fileName);
     const data = await AWS.upload(fileName, fileContent);
     req.body.image = data.Location;
     console.log(data.Location);
@@ -126,6 +132,9 @@ router.get("/pagesFeed", (req, res) => {
   mongo.feeds.getPages().then((numPages) => res.json(numPages));
 });
 
+router.get("/me", (req, res) => {
+  res.redirect("/");
+});
 router.get("/rooms/:user", (req, res) => {
   console.log("Entra");
   mongo.feeds.findByUsername(req.params.user).then((data) => res.json(data));
