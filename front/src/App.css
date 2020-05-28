@@ -32,7 +32,9 @@ li.dd-list-item{
   min-width: 20rem;
   max-height: 52rem;
 }
-
+.navbar{
+  background-color: white;
+}
 .Navbar{
 color: white;
 background-color: white;
