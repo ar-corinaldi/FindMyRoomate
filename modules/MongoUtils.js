@@ -72,6 +72,39 @@ function MongoUtils() {
 
   mu.feeds = {};
 
+  // Metodo que elimina una habitacion
+  mu.feeds.delete = (roomId) => {
+    return mu.connect().then((client) => {
+      const feeds = client.db(DB_NAME).collection("Feed");
+      const query = { _id: ObjectId(roomId) };
+      return feeds
+        .findOneAndDelete(query)
+        .catch((err) =>
+          console.error(`Failed to find and delete document: ${err}`)
+        )
+        .finally(client.close());
+    });
+  };
+
+  mu.feeds.update = (roomId, updateCamps) => {
+    return mu.connect().then((client) => {
+      const feeds = client.db(DB_NAME).collection("Feed");
+      const query = { _id: ObjectId(roomId) };
+      const update = {
+        $set: {
+          updateCamps,
+        },
+      };
+      console.log(update);
+      return feeds
+        .findOneAndUpdate(query, update)
+        .catch((err) =>
+          console.error(`Failed to find and update document: ${err}`)
+        )
+        .finally(() => client.close());
+    });
+  };
+
   mu.feeds.getPages = () => {
     return mu.connect().then((client) => {
       const feeds = client.db(DB_NAME).collection("Feed");

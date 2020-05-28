@@ -15,9 +15,9 @@ function Feed(props) {
 
   useEffect(() => {
     fetch("/pagesFeed")
-      .then(res => res.json())
-      .then(newPages => setPages(newPages));
-  },[]);
+      .then((res) => res.json())
+      .then((newPages) => setPages(newPages));
+  }, []);
 
   useEffect(() => {
     fetching();
@@ -143,14 +143,14 @@ function Feed(props) {
     <div>
       <section>
         <h3>Current Offers</h3>
-        <SearchBar setFeed={setFeed} feed={feed} pages={pages} setPages={setPages}/>
+        <SearchBar
+          setFeed={setFeed}
+          feed={feed}
+          pages={pages}
+          setPages={setPages}
+        />
       </section>
 
-      <div className="chatbox-container" ref={chatContainerRef}>
-        <div id="talkjs-container" style={{ height: "300px" }}>
-          <i></i>
-        </div>
-      </div>
       <div id="thisCards">{renderFeed()}</div>
 
       <div id="pagination">

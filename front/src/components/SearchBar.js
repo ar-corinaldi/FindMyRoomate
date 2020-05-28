@@ -1,12 +1,17 @@
 import React, { useState, useRef } from "react";
+import Dropdwown from "./Dropdown";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import TextField from "@material-ui/core/TextField";
+import useAutocomplete from "@material-ui/lab/useAutocomplete";
 
 function SearchBar(props) {
   const [text, setText] = useState("");
+  const [input, setInput] = useState("");
   const textRef = useRef();
   const fetching = async (text) => {
     let newText = text.replace(" ", "-");
     let url = `/search/${newText}`;
-    if(text==="") url = "/loadFeed";
+    if (text === "") url = "/loadFeed";
     const res = await fetch(url);
     const data = await res.json();
     props.setFeed(data);
@@ -15,20 +20,40 @@ function SearchBar(props) {
 
   let change = (e) => {
     e.preventDefault();
-    setText(textRef.current.value);
-    
-    fetching(textRef.current.value);
-  };
 
+    fetching(input);
+  };
+  const options = [
+    "COL",
+    "USD",
+    "EUR",
+    "Only Private",
+    "Shared",
+    "Private and public",
+    "Complete",
+    "Only room",
+    "No furniture",
+  ];
   return (
     <div className="col">
       <form class="form-inline md-form mr-auto mb-4">
-        <input
-          class="form-control mr-sm-2"
-          type="text"
-          placeholder="Search"
-          aria-label="Search"
-          ref={textRef}
+        <Autocomplete
+          id="combo-box-demo"
+          options={options}
+          getOptionLabel={(option) => option}
+          style={{ width: 300 }}
+          value={text}
+          onChange={(event, newText) => {
+            console.log(newText);
+            setText(newText);
+          }}
+          inputValue={input}
+          onInputChange={(event, newInputValue) => {
+            setInput(newInputValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params} label="Combo box" variant="outlined" />
+          )}
         />
         <button
           class="btn btn-elegant btn-rounded btn-sm my-0"
@@ -36,7 +61,10 @@ function SearchBar(props) {
         >
           Search
         </button>
-        <div className="ml-3">{text===""? "" : `Last search '${text}'`}</div>
+
+        <div className="ml-3">
+          {input === "" ? "" : `Last search '${input}'`}
+        </div>
       </form>
     </div>
   );

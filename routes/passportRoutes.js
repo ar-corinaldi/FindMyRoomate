@@ -28,6 +28,15 @@ router.post(
   }
 );
 
+// Este metodo recibe el _id de la habitacion que desea eliminar
+router.get("/rooms/delete/:roomId", (req,res) => {
+  mongo.feeds.delete(req.params.roomId).then(deleted => res.json(deleted));
+});
+
+router.get("/rroms/update/:roomId", (req,res) => {
+  mongo,feeds.update(req.params.roomId).then(updated => res.json(updated));
+})
+
 router.get("/logout", function (req, res) {
   req.logout();
   res.redirect("/");

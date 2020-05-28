@@ -9,6 +9,11 @@
 
 }
 
+li.dd-list-item{
+  list-style-type: none;
+}
+
+
 #theseCards .card {
   max-width: 18rem;
   min-width: 20rem;
