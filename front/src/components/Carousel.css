@@ -39,7 +39,7 @@ body {
   /* #endregion */
   /* #region Card */
   /* Card */
-  .card {
+  .card-profile {
     border: 3px #f3f3f3 solid;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
     transition: all 0.3s linear;
@@ -49,14 +49,14 @@ body {
     max-width: 620px;
     text-align: left;
     margin: 0 auto; }
-    .card:hover {
+    .card-profile:hover {
       background-color: #f3f3f3;
       border-color: #f3f3f3; }
-    .card img {
+    .card-profile img {
       max-width: calc(100%);
       margin: 0 auto;
       display: block; }
-    .card .index {
+    .card-profile .index {
       background-color: rgba(0, 0, 0, 0.2);
       color: #fff;
       line-height: 20px;
@@ -66,32 +66,32 @@ body {
       right: 0;
       display: block;
       padding: 0 10px; }
-    .card .price {
+    .card-profile .price {
       margin: 0;
       padding: 10px 0;
       font-weight: bold; }
-    .card .details {
+    .card-profile .details {
       position: relative; }
-    .card .features {
+    .card-profile .features {
       list-style: none;
       padding: 0;
       margin: 0; }
-      .card .features li {
+      .card-profile .features li {
         padding-left: 24px;
         margin-right: 10px;
         display: inline-block; }
-        .card .features li span {
+        .card-profile .features li span {
           display: none; }
-        .card .features li.icon-bed {
+        .card-profile .features li.icon-bed {
           background: url(./assets/bed-left-side.svg) left center;
           background-size: auto 100%;
           background-repeat: no-repeat; }
-        .card .features li.icon-bath {
+        .card-profile .features li.icon-bath {
           background: url(./assets/bathtub.svg);
           background-size: auto 100%;
           background-repeat: no-repeat; }
-        .card .features li.icon-car {
-          background: url(./assets/car-compact.svg);
+        .card-profile .features li.icon-car {
+          background: url(./assets/location.svg);
           background-size: auto 100%;
           background-repeat: no-repeat; }
   

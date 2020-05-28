@@ -8,7 +8,6 @@ function MyProfile(props) {
     else {
       const res = await fetch(`/rooms/${props.user.username}`);
       const newRoom = await res.json();
-      console.log("Llegoooo las rooms", newRoom);
       setRooms(newRoom);
     }
   };

@@ -9,7 +9,11 @@ function CarouselControlled(props) {
     setIndex(selectedIndex);
   };
 
- 
+  const fetchAvaila = (room) => {
+    console.log(room);
+    fetch(`/rooms/update/${room._id}/${room.availability}`);
+  };
+
   return (
 
     <div className="container">
@@ -24,7 +28,7 @@ function CarouselControlled(props) {
           return (
             <Carousel.Item key={index}>
                
-               <div id={`card-${index}`} className="card">
+               <div id={`card-${index}`} className="card-profile">
                <img src={room.image} alt="room pictures" />
                <div className="details">
                 <span className="index">{index+1}</span>
@@ -34,21 +38,23 @@ function CarouselControlled(props) {
                 </p>
                 <ul className="features">
                     <li className="icon-bed">{room.furnished} <span><p>Furniture</p></span></li>
-                    <li className="icon-bath">{room.bathroom} <span>bathrooms</span></li>
-                    <li className="icon-car">{room.furnished} <span>parking spots</span></li>
+                    <li className="icon-bath">{room.bathroom} <span>Bathrooms</span></li>
+                    <li className="icon-car">{room.pets} <span>Pets</span></li>
                 </ul>
             </div>
         </div>
+        <button className="btn mt-4" onClick={() => fetchAvaila(room)}>
+                {room.availability ? "Available" : "No Available"}
+              </button>
 
             </Carousel.Item>
           );
         })}
   </Carousel>
-        <div className="container">
-        <button className="btn">Not available</button>
-        </div>
+
  
   </div>
+
   );
 }
 
