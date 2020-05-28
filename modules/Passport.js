@@ -20,7 +20,7 @@ passport.use(
         console.log("contraseña no es");
         return cb(null, false);
       }
-      console.log("User found");
+      console.log("User found", user);
       return cb(null, user);
     });
   })
@@ -46,7 +46,7 @@ const configurePassport = (app) => {
       secret: process.env.SECRET || "yUQz+:ZS-5pK=,7bcR!%r&P)UW[Xv=",
       resave: false,
       saveUninitialized: false,
-      cookie: { expires: new Date(Date.now() + 900000) },
+      // cookie: { expires: new Date(Date.now() + 900000) },
     })
   );
 
@@ -62,4 +62,16 @@ function validPassword(password, hash, salt) {
     .pbkdf2Sync(password, salt, 10000, 64, "sha512")
     .toString("hex");
   return hash === hashVerify;
+}
+
+function genPassword(password) {
+  var salt = crypto.randomBytes(32).toString("hex");
+  var genHash = crypto
+    .pbkdf2Sync(password, salt, 10000, 64, "sha512")
+    .toString("hex");
+
+  return {
+    salt: salt,
+    hash: genHash,
+  };
 }
