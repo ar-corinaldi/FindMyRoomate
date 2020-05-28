@@ -9,6 +9,7 @@ function Register(props) {
   const [datebirth,setDate]= useState();
   const [age,setAge]= useState({});
 
+
   const calculate_age = (dob1) => {
 
     const birthDate = new Date(dob1); 
@@ -97,6 +98,21 @@ function Register(props) {
                     </div>
 
                     <form method="POST" onSubmit={fetching}>
+                      
+
+                    <div className="form-group">
+                        <label className="label-input" htmlFor="nameRegister">
+                          Full Name
+                        </label>
+                        <input
+                          type="text"
+                          name="nameRegister"
+                          id="nameRegister"
+                          className="form-control"
+                          required
+                        />
+                      </div>
+                   
                       <div className="form-group">
                         <label className="label-input" htmlFor="username">
                           Username
@@ -139,25 +155,20 @@ function Register(props) {
 
 
                       <div className="form-group">
-                      <label
+                        <label
                           className="label-input"
-                          htmlFor="birthdate"
-                          className="primary"
+                          htmlFor="Age"
                         >
-      
+                         Age
                         </label>
-                      <TextField
-                     id="date"    
-                     type="date"
-                     label="Birth date"
-                     onChange={handleChange_age}
-                     defaultValue="yyyy-mm-dd"
-                     className={classes.textField}
-                     InputLabelProps={{
-                     shrink: true,
-                      }}
-                     />
-                       </div>
+                        <input
+                          type="age"
+                          name="age"
+                          id="age"
+                          className="form-control"
+                          required
+                        />
+                      </div>
 
                        <div className="form-group col-lg-12">
                    <InputLabel htmlFor="occupation">Occupation</InputLabel>

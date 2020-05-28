@@ -112,6 +112,7 @@ function Feed(props) {
             <h6 className="card-text col-lg-6">Bathroom:</h6> <p className="card-text col-lg-6">{element.bathroom}</p>
             <h6 className="card-text col-lg-6">Gender Preference:</h6> <p className="card-text col-lg-6">{element.preference}</p>
             <h6 className="card-text col-lg-6">Pets:</h6> <p className="card-text col-lg-6">{element.pets}</p>
+            
           </div>
           </div>
           <ul className="list-group list-group-flush">

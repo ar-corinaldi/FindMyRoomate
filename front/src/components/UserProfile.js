@@ -80,7 +80,7 @@ function UserProfile({ match }) {
             </div>
             <div>
               <p>Age:{profile[1].age}</p>
-              <p>Genre: {profile[1].genre}</p>
+              <p>Gender: {profile[1].gender}</p>
               <p>{profile[1].description}</p>
             </div>
             <div>
