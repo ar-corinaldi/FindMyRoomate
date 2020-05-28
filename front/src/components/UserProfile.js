@@ -57,7 +57,6 @@ function UserProfile({ match }) {
     fetch(`/profile/${match.params.userProfile}`)
       .then((res) => res.json())
       .then((newprofile) => {
-        console.log(newprofile);
         setProfile(newprofile)
       });
   }, []);

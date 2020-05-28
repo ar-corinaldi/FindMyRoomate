@@ -8,28 +8,32 @@ function CarouselControlled(props) {
     setIndex(selectedIndex);
   };
 
- 
+  const fetchAvaila = (room) => {
+    console.log(room);
+    fetch(`/rooms/update/${room._id}/${room.availability}`);
+  };
 
   return (
     <Carousel activeIndex={index} onSelect={handleSelect} className="w-100">
-      {!props.rooms
-        ? <h1>"No rooms yet"</h1>
-        : props.rooms.map((room, index) => {
-            return (
-              <Carousel.Item key={index}>
-                <img
-                  src={room.image}
-                  alt="First slide"
-                />
-                <Carousel.Caption>
-                  <h3>{props.address}</h3>
-                  <p>{props.price}</p>
-                </Carousel.Caption>
+      {!props.rooms ? (
+        <h1>"No rooms yet"</h1>
+      ) : (
+        props.rooms.map((room, index) => {
+          return (
+            <Carousel.Item key={index}>
+              <img src={room.image} alt="First slide" />
+              <Carousel.Caption>
+                <h3>{props.address}</h3>
+                <p>{props.price}</p>
+              </Carousel.Caption>
 
-                <button className="btn" onClick={()=> handleSelect} >Not available</button>
-              </Carousel.Item>
-            );
-          })}
+              <button className="btn mt-4" onClick={() => fetchAvaila(room)}>
+                {room.availability ? "Available" : "No Available"}
+              </button>
+            </Carousel.Item>
+          );
+        })
+      )}
     </Carousel>
   );
 }

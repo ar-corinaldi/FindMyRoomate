@@ -20,6 +20,10 @@ router.get("/login", function (req, res) {
   res.redirect("/");
 });
 
+router.get("/feed", (req, res) => {
+  res.redirect("/");
+});
+
 router.post(
   "/login",
   passport.authenticate("local", { failureRedirect: "/login" }),
@@ -29,13 +33,21 @@ router.post(
 );
 
 // Este metodo recibe el _id de la habitacion que desea eliminar
-router.get("/rooms/delete/:roomId", (req,res) => {
-  mongo.feeds.delete(req.params.roomId).then(deleted => res.json(deleted));
+router.get("/rooms/delete/:roomId", (req, res) => {
+  mongo.feeds.delete(req.params.roomId).then((deleted) => res.json(deleted));
 });
 
-router.get("/rroms/update/:roomId", (req,res) => {
-  mongo,feeds.update(req.params.roomId).then(updated => res.json(updated));
-})
+router.get("/rooms/update/:roomId/:availability", (req, res) => {
+  console.log(req.params);
+  let param = true;
+  if(req.params.availability===false || req.params.availability==="false") param = true;
+  else if(req.params.availability===true || req.params.availability === "true") param = false;
+  console.log("Antes", param);
+  console.log("Despues", param);
+  mongo.feeds
+    .update(req.params.roomId, param)
+    .then((updated) => res.json(updated));
+});
 
 router.get("/logout", function (req, res) {
   req.logout();
@@ -119,18 +131,27 @@ router.get("/getUsers2", (req, res) => {
   });
 });
 
+router.get("/profile", (req, res) => {
+  res.redirect("/");
+});
+
 router.get("/profile/:userProfile", (req, res) => {
   console.log("HOLA SIRVE", req.params.userProfile);
   mongo.users.findByUsername2(req.params.userProfile).then((data) => {
     console.log("UserProfile", data);
     let users = [];
     console.log("THIS IS current user", req.user);
-    if (req.user) {
+    if (req.user || data !== null) {
       users.push(req.user);
       users.push(data);
       console.log("THIS IS USERS", users);
       res.json(users);
-    } else res.json(data);
+    } else if (data !== null) {
+      users.push(data);
+      res.json(users);
+    } else {
+      res.json(users);
+    }
   });
 });
 

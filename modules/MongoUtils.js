@@ -92,7 +92,7 @@ function MongoUtils() {
       const query = { _id: ObjectId(roomId) };
       const update = {
         $set: {
-          updateCamps,
+          availability: updateCamps,
         },
       };
       console.log(update);
