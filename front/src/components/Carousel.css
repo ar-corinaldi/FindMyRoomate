@@ -1,45 +1,17 @@
-body {
-    margin: 0;
-    padding: 0 0 100px 0;
-    font-family: sans-serif;
-    overflow-x: hidden; }
-  
-  .App {
-    text-align: center;
-    position: relative; }
-  
-  .App-logo {
-    height: 80px; }
+
   
   /* DEMO STYLES */
-  .nav {
-    padding: 30px 0;
-    background-color: #222; }
+
   h1{
     font-size: x-large;
   }
   h2{
     font-size:large;
   }
-  .nav a {
-    display: inline-block;
-    width: 100px;
-    text-align: center;
-    margin: 0 15px;
-    padding: 10px;
-    border: 1px rgba(255, 255, 255, 0.5) solid;
-    transition: all 0.3s linear;
-    text-decoration: none;
-    color: white; }
+
   
-  .nav a.active {
-    background-color: #61DAFB;
-    color: #222; }
-  
-  section {
-    padding: 20px 0;
-    max-width: 600px;
-    margin: 0 auto; }
+
+
   
   /* #endregion */
   /* #region Card */

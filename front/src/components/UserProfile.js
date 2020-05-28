@@ -62,7 +62,7 @@ function UserProfile({ match }) {
   }, []);
 
   return (
-    <div className="container" >
+    <div  >
       <div  ref={chatContainerRef} className="card-container">
         <div className="upper-container">
           <div className="image-container">
