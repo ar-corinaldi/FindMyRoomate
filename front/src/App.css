@@ -13,6 +13,9 @@ li.dd-list-item{
   list-style-type: none;
 }
 
+#id{
+  margin-top: 40%;
+}
 
 #theseCards .card {
   max-width: 18rem;
