@@ -16,14 +16,15 @@ const ws = require("../modules/WebSocketUtils");
 
 const port = normalizePort(process.env.PORT || "8000");
 app.set("port", port);
-
-/**
+// app
+//   .use((req, res) => res.sendFile(express.static(path.join(__dirname, "front/build")), {root: __dirname}))
+  /**
  * Create HTTP server.
  */
 
 const server = http.createServer(app);
 ws.setupWS(server);
-mongo.listenForChanges();
+mongo.listenForChanges(ws.notifyClient);
 
 /**
  * Listen on provided port, on all network interfaces.

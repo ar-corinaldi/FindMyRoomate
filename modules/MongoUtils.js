@@ -72,6 +72,14 @@ function MongoUtils() {
 
   mu.feeds = {};
 
+  mu.feeds.findById = (_id) => {
+    return mu.connect().then((client) => {
+      const feeds = client.db(DB_NAME).collection("Feed");
+      const query = { _id: ObjectId(_id) };
+      return feeds.findOne(query).finally(() => client.close());
+    });
+  };
+
   // Metodo que elimina una habitacion
   mu.feeds.delete = (roomId) => {
     return mu.connect().then((client) => {
@@ -132,6 +140,7 @@ function MongoUtils() {
     return mu.connect().then((client) => {
       const feeds = client.db(DB_NAME).collection("Feed");
       let query = { user: user };
+      console.log(query);
       return feeds
         .find(query)
         .toArray()
@@ -170,7 +179,7 @@ function MongoUtils() {
     });
   };
 
-  mu.listenForChanges = () => {
+  mu.listenForChanges = (notifyClient) => {
     const col = "Feed";
     console.log("Listening to changes in the collection", col);
     return mu.connect().then((client) => {
@@ -178,6 +187,11 @@ function MongoUtils() {
 
       cursor.on("change", (data) => {
         console.log("Change in", col, data);
+        mu.feeds.findById(data.documentKey._id).then((document) => {
+          mu.feeds.findByUsername(document.user).then((rooms) => {
+            notifyClient(JSON.stringify(rooms));
+          });
+        });
       });
     });
   };

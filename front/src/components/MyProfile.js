@@ -11,41 +11,24 @@ function MyProfile(props) {
       setRooms(newRoom);
     }
   };
+  const setupWS = () => {
+    const url = process.env.BACKEND || "ws://localhost:8000";
+    const ws = new WebSocket(url);
+    ws.onopen = () => {
+      console.log("Websocket client connected");
+      ws.onmessage = (msg) => {
+        // console.log("WS got message", msg.data);
+        setRooms(JSON.parse(msg.data));
+      }
+    };
+  };
   useEffect(() => {
+    setupWS();
+    
     if (!rooms) fetching();
   });
   return (
     <div className="container">
-      {/* <div className="row">
-        <div class="card-container">
-          <div class="upper-container">
-            <div class="image-container">
-              <img src="profile.jpg" />
-            </div>
-          </div>
-
-          {!props.user ? (
-            "Log in please"
-          ) : (
-            <div class="lower-container">
-              <div>
-                <h3>{props.user.username}</h3>
-                <h4>{props.user.occupation}</h4>
-              </div>
-              <div>
-                <p>Age:{props.user.age}</p>
-                <p>Genre: {props.user.genre}</p>
-                <p>{props.user.description}</p>
-              </div>
-              <div>
-                <a href="#" class="btn">
-                  Contact me
-                </a>
-              </div>
-            </div>
-          )}
-        </div>
-      </div> */}
       <div className="row w-100">
         <CarouselControlled rooms={rooms} />
       </div>
