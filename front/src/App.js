@@ -15,7 +15,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
   const [user, setUser] = useState(undefined);
   
-  
   useEffect(() => {
 
     fetch("/getUser", { credentials: "include" })
