@@ -8,6 +8,7 @@ function WSUtils() {
     const wss = new WebSocket.Server({ server });
     wss.on("connection", (ws) => {
       console.log("New Connection and notifying");
+      // Según esta linea entiendo que solo funciona para un socket al mismo tiempo.
       websocket = ws;
     });
   };
