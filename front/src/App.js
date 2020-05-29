@@ -12,6 +12,9 @@ import MyProfile from "./components/MyProfile";
 import Welcome from "./components/Welcome";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+/* Comentario Juan Felipe Torres: Para este componente y los demás, no pusieron Proptypes y veo que si tienen varios props en
+los componentes, sería buena práctica agregarlos para validar los tipos de datos que pasan*/
+
 function App() {
   const [user, setUser] = useState(undefined);
   
