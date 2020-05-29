@@ -13,6 +13,7 @@ function Login(props) {
                 id="bg-login-image"
               >
                 {" "}
+                <!-- Sería bueno disminuir un poco la resolución de la imagen original, ya que de todos modos se restringen sus dimensiones y se está demorando un poco en cargar -->
                 <img
                   width="450"
                   height="600"
