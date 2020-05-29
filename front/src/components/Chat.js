@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Talk from 'talkjs';
 //require("dotenv").config();
+// Recomendable usar componentes funcionales con hooks
 class Chat extends Component {
 
   
