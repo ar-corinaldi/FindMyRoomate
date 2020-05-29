@@ -10,6 +10,10 @@ const storage = multer.memoryStorage({
     cb(null, "");
   },
 });
+
+/* Comentario Juan Felipe Torres: Una buena práctica sería validar los status que llegan con cada ruta, usando res.status(200)
+pueden verificar que está siendo correcto o si es otro estado, pueden manejar esos errores e imprimir en consola */
+
 const upload = multer({ storage: storage });
 /* GET users listing. */
 router.get("/", function (req, res) {
