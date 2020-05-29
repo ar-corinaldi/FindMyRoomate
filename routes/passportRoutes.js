@@ -10,6 +10,10 @@ const storage = multer.memoryStorage({
     cb(null, "");
   },
 });
+
+/* Comentario Juan felipe torres: pueden borrar algunos logs innecesarios */
+
+
 const upload = multer({ storage: storage });
 /* GET users listing. */
 router.get("/", function (req, res) {
