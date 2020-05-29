@@ -228,6 +228,7 @@ function Profile(props) {
               <label className="label-input" htmlFor="image">
                 Upload an image
               </label>
+              <!-- El estilo de este input no se ve bien con respecto al resto de la página -->
               <input
                 className="form-control-file"
                 type="file"
