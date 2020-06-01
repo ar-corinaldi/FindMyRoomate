@@ -67,6 +67,7 @@ router.post("/register", (req, res) => {
     res.redirect("/");
   } else {
     const saltHash = genPassword(req.body.password);
+    //Code review antoine noreau: Muy bien usar eso, me parece simple y eficiente. Buena idea!
     const salt = saltHash.salt,
       hash = saltHash.hash,
       correo = req.body.emailRegister,
