@@ -24,7 +24,7 @@
     "react-bootstrap": "^1.0.1",
     "talkjs": "^0.14.2",
     "uuid": "^8.1.0",
-    "ws": "^7.3.0"
+    "ws": "^7.4.6"
   },
   "devDependencies": {
     "eslint": "^7.0.0",
