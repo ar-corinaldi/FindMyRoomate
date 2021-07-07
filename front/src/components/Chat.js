@@ -3,6 +3,8 @@ import Talk from 'talkjs';
 //require("dotenv").config();
 class Chat extends Component {
 
+    // Code review from antoine noreau: Muy buena idea usar Talk.js, el chat box me parece en la app.
+    // Con cada nueva sesion se descarga toda la historia de chat, no es necesario, podria ser simplemente un nuevo chatbox por cada connection.
   
     constructor(props) {
         super(props);
