@@ -56,6 +56,8 @@ const configurePassport = (app) => {
 
 module.exports = configurePassport;
 
+//Valentina Chacon: una alternativa para manejar las contraseñas es bcrypt que las maneja de forma mas eficiente de como lo hacen en este momento. No se porque en las rutas tambien manejan la encriptacion
+
 // Helper functiona
 function validPassword(password, hash, salt) {
   var hashVerify = crypto
