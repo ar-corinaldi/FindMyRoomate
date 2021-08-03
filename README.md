@@ -74,7 +74,7 @@ In order to run locally you must create a .env file containing any environment v
 <br>
 <h2> Link </h2>
 
-<a>https://bou-solution.herokuapp.com</a>
+<a>https://find-my-roomate.herokuapp.com/</a>
 
 <br>
 
